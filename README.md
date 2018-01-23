@@ -211,3 +211,9 @@ public class BigO {
     - remove the element from position i
 
 _dereferencing:_ getting the address of a data item
+
+## Amortized Cost
+
+When an algorithm has processes that may be much longer but usually is quick, so you take the average. [roughly]
+
+e.g. resizing an an array when adding/removing
