@@ -228,3 +228,19 @@ e.g. resizing an an array when adding/removing
 - Implements **List** interface with an array
 - Allows for get(), set() in O(1)
 - add(), remove () in O(1 + min(1, n-i))
+
+### DualArrayDeque
+
+- Implements **List** interface
+- Uses two **ArrayStacks** front-to-front
+- Since arrays are quick to add to the end, this makes front and back operations fast
+- May be rebalanced if one array is much larger than the other
+- Use Potential Function to decide when to rebalance
+
+#### Potential Function
+
+Define a potential function for the data structure to be the absolute difference of the sizes of the two stacks
+
+_P = |front_array.size - back_array.size|_
+
+- Adding or removing an element can only increase/decrease 1 to this function
