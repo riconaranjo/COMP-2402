@@ -183,9 +183,9 @@ public class BigO {
 
 ## Array-based Data Structures
 
-### ArrayStack
+### ArrayStack 
 
-- List interface implemented with an array
+- Implements **List** interface with an array
 - Similar to ArrayList
 - Efficient only for stack opertations
     - Add/remove last
@@ -212,8 +212,19 @@ public class BigO {
 
 _dereferencing:_ getting the address of a data item
 
-## Amortized Cost
+#### Amortized Cost
 
 When an algorithm has processes that may be much longer but usually is quick, so you take the average. [roughly]
 
 e.g. resizing an an array when adding/removing
+
+### ArrayQueue
+
+- Implements **Queue** interface with an array
+- Cyclic array, (n: number of elements, j: 'index' of last element)
+
+### ArrayDeque
+
+- Implements **List** interface with an array
+- Allows for get(), set() in O(1)
+- add(), remove () in O(1 + min(1, n-i))
