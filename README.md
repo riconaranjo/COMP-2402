@@ -19,7 +19,22 @@ This is how to sort strings based on length by using anonymous object [**Compara
 ``` java
 Collections.sort(list, new Comparator<String>() {
     public int compare(String x, String y) {
-        return x.l;ength() - y.length();
+        return x.length() - y.length();
+    }
+});
+
+// or you can use lambda function
+list.sort( (String o1, String o2) -> o1.compareTo(o2) );
+
+// if you want to sort by length and also alphabetically
+Collections.sort(list,new Comparator<String>() {
+    public int compare(String x, String y) {
+        // if not same length, use length
+        if(x.length() != y.length()) {
+            return x.length() - y.length();
+        }
+        // else compare as strings
+        return x.compareTo(y);
     }
 });
 ```
@@ -30,9 +45,11 @@ The **compare(x,y)** method works by moving an element left if the **compare(x,y
     (0) x = y
     (+) x > y
 
-## Maps [Haskhap]
+## Maps [Hashmap]
 
 Also known as dictionaries in Swift or C#...
+
+- Cannot have duplicate entries
 
 ``` java
 Map<String, Integer> map = new HashMap<>();
@@ -51,7 +68,9 @@ map.get(key); // fast operation, returns null if no key found
 
 ## List
 
-Continuing from previous example
+Continuing from previous example...
+
+**Map.Entry** is just a key-value pair
 
 ``` java
 List<Map.Entry<String,Integer>> entryList = new ArrayList<>();
@@ -133,7 +152,7 @@ After a certain point, g(x) will grow as fast [or faster] than f(x)
 
 - g(x) is the upper limit to f(x)
 
-**_O(g(n)) ∀ (f(n) < c•g(n))_**
+`O(g(n)) ∀ (f(n) < c•g(n))`
 
 ### Orders of growth
 
@@ -183,12 +202,14 @@ public class BigO {
 
 ## Array-based Data Structures
 
-### ArrayStack 
+### ArrayStack
 
 - Implements **List** interface with an array
 - Similar to ArrayList
 - Efficient only for stack opertations
-    - Add/remove last
+- superceded by ArrayDeque
+- **get(), set() in O(1 + n-i)**
+    - good for accessing the back
 
 ### Stacks vs List
 
@@ -218,16 +239,29 @@ When an algorithm has processes that may be much longer but usually is quick, so
 
 e.g. resizing an an array when adding/removing
 
-### ArrayQueue
+### ArrayQueue & ArrayDeque
 
-- Implements **Queue** interface with an array
+Allow for efficient access at front and backs.
+
+![array-queue](ArrayQueue.png)
+
+#### ArrayQueue
+
+- Implements **Queue** and **List** interfaces with an array
 - Cyclic array, (n: number of elements, j: 'index' of last element)
+- **add(), remove() in O(1)**
+    - quick to access front or back
+    - cannot access anywhere else
+- **resize is O(n)**
 
-### ArrayDeque
+#### ArrayDeque
 
 - Implements **List** interface with an array
-- Allows for get(), set() in O(1)
-- add(), remove () in O(1 + min(1, n-i))
+- **get(), set() in O(1)**
+- **add(), remove () in O(1 + min(i, n-i))**
+    - quick to access front or back
+    - not so quick to access middle
+- **resize is O(n)**
 
 ### DualArrayDeque
 
@@ -236,11 +270,26 @@ e.g. resizing an an array when adding/removing
 - Since arrays are quick to add to the end, this makes front and back operations fast
 - May be rebalanced if one array is much larger than the other
 - Use Potential Function to decide when to rebalance
+- **get(), set() in O(1)**
+- **add(), remove() in O(1 + min(i, n-i))**
+    - quick to access front or back, but not middle
+
+![dual-array-deque](DualArrayDeque.png)
 
 #### Potential Function
 
 Define a potential function for the data structure to be the absolute difference of the sizes of the two stacks
 
-_P = |front_array.size - back_array.size|_
+`P = | front_array.size - back_array.size |`
 
 - Adding or removing an element can only increase/decrease 1 to this function
+
+### RootishArrayStack
+
+- Implements the **List** interface using multiple backing arrays
+- Reduces 'wasted space' [unused space]
+- At most: _sqrt(n)_ unused array locations
+- Good for space efficiency
+- **get(), set() in O(1)**
+- **add(), remove() in O(1 + n-i)**
+    - quick to access the back
