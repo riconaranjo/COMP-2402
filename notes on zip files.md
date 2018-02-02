@@ -22,8 +22,8 @@ java comp2402a1.PartX tests/testX-01.in tests/testX-01.out
 
 ### For copying and pasting
 
-    javac Part8.java
+    javac Part9.java
 
-    java comp2402a1.Part8 tests/test8-01.in tests/test8-01.out
+    java comp2402a1.Part9 tests/test9-01.in tests/test9-01.out
 
     zip -r comp2402a1.zip comp2402a1 tests -x "*.DS_Store" "*.class"

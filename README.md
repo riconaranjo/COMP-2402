@@ -100,7 +100,8 @@ Bad for random access
 
 ## Priority Queue
 
-Essentially: uses a heap instead of a tree, in order to keep a certain one on top (?).
+Essentially: uses a heap instead of a tree, in order to keep a certain one on top.
+So first element is 'sorted' and then rest is unsorted. 
 
 Not good for sorting, or random access.
 
@@ -293,3 +294,5 @@ Define a potential function for the data structure to be the absolute difference
 - **get(), set() in O(1)**
 - **add(), remove() in O(1 + n-i)**
     - quick to access the back
+
+![rootish-array](RootishArray.png)
