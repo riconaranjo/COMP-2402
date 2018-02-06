@@ -14,7 +14,7 @@ This command will comiple the java file and output any compilation errors.
 
     javac PartX.java
 
-## Running Java Programs Using Terminal
+## Running Java Programs Using Terminal [Assignment 1]
 
 This command will run the compiled Java code, take the `testX-01.in` file as input and write to the `testX-01.in` file.
 
@@ -22,8 +22,8 @@ java comp2402a1.PartX tests/testX-01.in tests/testX-01.out
 
 ### For copying and pasting
 
-    javac Part9.java
+    javac Part10.java
 
-    java comp2402a1.Part9 tests/test9-01.in tests/test9-01.out
+    java comp2402a1.Part10 tests/test10-01.in tests/test10-01.out
 
     zip -r comp2402a1.zip comp2402a1 tests -x "*.DS_Store" "*.class"

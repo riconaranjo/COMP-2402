@@ -93,11 +93,6 @@ dq.addLast("penultimate");
 dq.addLast("last");
 ```
 
-## Linked Lists
-
-Good for insertion/modification [_add/remove_] </br>
-Bad for random access
-
 ## Priority Queue
 
 Essentially: uses a heap instead of a tree, in order to keep a certain one on top.
@@ -114,8 +109,8 @@ System.out.println(pq.remove());    // remove smallest element
 
 If alphabetical, one that starts with 'a' will be removed. After first element, the queue is not sorted. Removing one will promote next smallest to the top
 
-
 ## Asymptotic Notation [Big O]
+
 Used to analyze complexity of algorithms, to find faster, or which ones requires more space.
 
 ### Comparing data structures
@@ -296,3 +291,34 @@ Define a potential function for the data structure to be the absolute difference
     - quick to access the back
 
 ![rootish-array](RootishArray.png)
+
+## Linked Lists
+
+- Recursive data structure made up of nodes
+- Pointers to head and tail, and each node points to the next node
+- Efficient add/remove but slow read/write
+
+### SLList [Singly-Linked List]
+
+- Implements the **Stack** and **Queue** interfaces
+- **push(), pop() in O(1)**
+- **add(), remove() in O(1)**
+
+![linked-list](LinkedList.png)
+
+### DSList [Doubly-Linked List]
+
+- Forward and backwards pointers at each node
+- Implements the **List** interfaces
+- **get(), set() in O(1 + min(i, n-i))**
+- **add(), remove() in O(1 + min(i, n-i))**
+
+![doubly-linked-list](DoublyLinkedList.png)
+
+### SELList [Space-Efficient Linked List]
+
+- Like a doubly-linked list, but uses block size _b_
+- Is an **ArrayDeque**
+- Implements the **List** interfaces
+- **get(), set() in O(1 + min(i, n-i)/_b_)**
+- **add(), remove() in O(1 + min(i, n-i)/_b_)**
