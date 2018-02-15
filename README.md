@@ -205,7 +205,7 @@ public class BigO {
 - Efficient only for stack opertations
 - superceded by ArrayDeque
 - **get(), set() in O(1 + n-i)**
-    - good for accessing the back
+  - good for accessing the back
 
 ### Stacks vs List
 
@@ -219,13 +219,13 @@ public class BigO {
 ### List Interface
 
 - get(i) / set(i,x)
-    - Access element i, and return/replace it
+  - Access element i, and return/replace it
 - size()
-    - number of items in list
+  - number of items in list
 - add(i,x)
-    - insert new item x at position i
+  - insert new item x at position i
 - remove(i)
-    - remove the element from position i
+  - remove the element from position i
 
 _dereferencing:_ getting the address of a data item
 
@@ -246,8 +246,8 @@ Allow for efficient access at front and backs.
 - Implements **Queue** and **List** interfaces with an array
 - Cyclic array, (n: number of elements, j: 'index' of last element)
 - **add(), remove() in O(1)**
-    - quick to access front or back
-    - cannot access anywhere else
+  - quick to access front or back
+  - cannot access anywhere else
 - **resize is O(n)**
 
 #### ArrayDeque
@@ -255,8 +255,8 @@ Allow for efficient access at front and backs.
 - Implements **List** interface with an array
 - **get(), set() in O(1)**
 - **add(), remove () in O(1 + min(i, n-i))**
-    - quick to access front or back
-    - not so quick to access middle
+  - quick to access front or back
+  - not so quick to access middle
 - **resize is O(n)**
 
 ### DualArrayDeque
@@ -268,7 +268,7 @@ Allow for efficient access at front and backs.
 - Use Potential Function to decide when to rebalance
 - **get(), set() in O(1)**
 - **add(), remove() in O(1 + min(i, n-i))**
-    - quick to access front or back, but not middle
+  - quick to access front or back, but not middle
 
 ![dual-array-deque](DualArrayDeque.png)
 
@@ -288,7 +288,7 @@ Define a potential function for the data structure to be the absolute difference
 - Good for space efficiency
 - **get(), set() in O(1)**
 - **add(), remove() in O(1 + n-i)**
-    - quick to access the back
+  - quick to access the back
 
 ![rootish-array](RootishArray.png)
 
@@ -318,7 +318,131 @@ Define a potential function for the data structure to be the absolute difference
 ### SELList [Space-Efficient Linked List]
 
 - Like a doubly-linked list, but uses block size _b_
-- Is an **ArrayDeque**
+- Is a series of **ArrayDeque** with _next_ and _prev_ pointers
 - Implements the **List** interfaces
 - **get(), set() in O(1 + min(i, n-i)/_b_)**
 - **add(), remove() in O(1 + min(i, n-i)/_b_)**
+  - is quicker because you can skip blocks of data
+
+## Skiplist
+
+- Like a singly-linked list, with 'skips'
+- Randomly generated structure
+- Faster searches than linked lists
+
+### SSet Interface
+
+- Additional nodes with pointers that allow 'skipping'
+- Successor search: **find(x) will return smallest value >= x**
+- **find(), add(), remove() in O(log n)**
+
+![sset-interface](SSetInterface.png)
+
+## List Implementations
+
+|            | get/set             | add/remove          |
+|------------|---------------------|---------------------|
+| Arrays     | _O(1)_              | _O(1 + min(i,n-i))_ |
+| LinkedList | _O(1 + min(i,n-i))_ | _O(1)*              |
+| Skiplist   | _O(log n)_          | _O(log n)_          |
+
+\* given a pointer to a location
+
+## Definitions
+
+**Random variable:** a random sample from a group of values
+
+**Expected value:** average value of a random variable
+
+**Indicator variable:** random variable with values of 0 or 1
+
+**Linearity of Expectation:** the expected value of a sum is equal to the sum of expected values
+
+`Expected height of node [if coin flips were used]:`
+
+    P(x = 1) = 1/2      // prob. that tails on first flip
+    P(x = 2) = 1/4      // prob. that tails on second flip
+    P(x = 3) = 1/8      // prob. that tails on third flip
+    ...
+    P(x = i) = 1/(2^i)
+
+    Thus,
+    E[x] = i*Sum(1/2^i)       // for all natural numbers
+    E[x] = Sum(E[I_j])
+    E[x] = Sum(P(I_j = i))
+
+    Indicator variable: 1 if tails, 0 is heads
+    P(I_1 = 1) = 1
+    P(I_2 = 1) = 1/2
+    ...
+    P(I_j = 1) = 1/(2^(i-1))
+
+    let S = Sum(P(x = i)) = 1 + 1/2 + 1/4 + ...
+
+    therefore,
+    S/2 = 1/2 + 1/4 + 1/8 + ...
+
+    S - S/2 = 1
+    => S = 2
+
+     E[x] = Sum(P(I_j = i)) = S = 1 + 1/2 + 1/4 + ...
+     E[x] = 2
+
+ `Expected number of elements in the skiplist:`
+
+    E[n_i] = ?
+
+    I_(i,j) = 1 if in list, 0 is not in list
+    // i is 0...n-1, number of nodes in list
+
+    // expected value of sum of indicator(element in list)
+    E[n_i] = E[ Sum( I_(i,j) ) ]
+    E[n_i] = Sum( E[ I_(i,j) ] )
+    E[n_i] = Sum( 1/(2^i) )     // average number values in each node
+    E[n_i] = n * ( 1/(2^i) )    // average height(node) * number of nodes
+
+`Average height of skiplist:`
+
+    h = # of levels in list
+
+    I_i = 1 if level is not empty, 0 if level empty
+
+    // expected value of sum of indicator(level not empty)
+    E[h] = E[ Sum( I_i ) ]      // from 0...infinity [no max height]
+    E[h] = Sum( E[ I_i ] )
+
+    I_i ≤ n_i   // if level exists, less likely than number of nodes
+
+    E[I_i] ≤ E[n_i] = n/(2^i)
+
+    // use log(n) since we know to prove O(log n)
+    E[h] = E[ I_i ]{ from [0] to [log(n)] }
+           + E[ I_i ]{ from [log(n) + 1] to [infinity] }
+
+    E[h] = [ log(n) + 1 ] + [ 1 ]       // because math
+
+    E[h]  = log(n) + 2 ≤ log(n) + 3
+
+`Average length of skiplist:`
+
+    R_i = # of horizontal steps at level ≤ n_i
+    l = Sum(R_i)
+
+    E[R_i] ≤ E[ # node height not promoted ]
+    E[R_i] ≤ E[ # node height promoted ] - 1
+    E[R_i] ≤ S - 1      // S = 2 from above
+    E[R_i] ≤ 1
+
+    let sp = total length of search path
+    E[sp] = E[h] + E[l]
+    E[sp] = ( log(n) + 3 ) + E[ Sum(R_i) ]
+    E[sp] = ( log(n) + 3 ) + Sum( E[ R_i ] )
+    E[sp] ≤ ( log(n) + 3 )
+            + Sum(1){ from [0] to [log(n)] }
+            + Sum( E[ n_i ] ){ from [log(n) + 1] to n }
+    E[sp] ≤ ( log(n) + 3 )
+            + log(n)
+            + Sum( n/(2^i) ){ from [log(n) + 1] to n }
+    E[sp] ≤ 2*log(n) + 6
+
+    E[sp] = O(log n) + O(1)
