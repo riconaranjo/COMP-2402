@@ -198,14 +198,15 @@ public class BigO {
 
 ## Array-based Data Structures
 
-### ArrayStack
+### ArrayStack [ArrayList]
 
 - Implements **List** interface with an array
 - Similar to ArrayList
-- Efficient only for stack opertations
+- Efficient only for stack operations [back]
 - superceded by ArrayDeque
-- **get(), set() in O(1 + n-i)**
-  - good for accessing the back
+- **get(), set() in O(1)**
+- **add(), remove() in O(1 + n-i)**
+  - good for write at the back
 
 ### Stacks vs List
 
@@ -245,8 +246,9 @@ Allow for efficient access at front and backs.
 
 - Implements **Queue** and **List** interfaces with an array
 - Cyclic array, (n: number of elements, j: 'index' of last element)
-- **add(), remove() in O(1)**
-  - quick to access front or back
+- **get(), set() in O(1)**
+- **add(), remove () in O(1 + min(i, n-i))**
+  - quick to write at front or back
   - cannot access anywhere else
 - **resize is O(n)**
 
@@ -254,8 +256,8 @@ Allow for efficient access at front and backs.
 
 - Implements **List** interface with an array
 - **get(), set() in O(1)**
-- **add(), remove () in O(1 + min(i, n-i))**
-  - quick to access front or back
+- **add(), remove() in O(1 + min(i, n-i))**
+  - quick to write at front or back
   - not so quick to access middle
 - **resize is O(n)**
 
@@ -268,7 +270,7 @@ Allow for efficient access at front and backs.
 - Use Potential Function to decide when to rebalance
 - **get(), set() in O(1)**
 - **add(), remove() in O(1 + min(i, n-i))**
-  - quick to access front or back, but not middle
+  - quick to write at front or back, but not middle
 
 ![dual-array-deque](DualArrayDeque.png)
 
@@ -288,7 +290,7 @@ Define a potential function for the data structure to be the absolute difference
 - Good for space efficiency
 - **get(), set() in O(1)**
 - **add(), remove() in O(1 + n-i)**
-  - quick to access the back
+  - quick to write at the back
 
 ![rootish-array](RootishArray.png)
 
@@ -343,7 +345,7 @@ Define a potential function for the data structure to be the absolute difference
 |            | get/set             | add/remove          |
 |------------|---------------------|---------------------|
 | Arrays     | _O(1)_              | _O(1 + min(i,n-i))_ |
-| LinkedList | _O(1 + min(i,n-i))_ | _O(1)*              |
+| LinkedList | _O(1 + min(i,n-i))_ | _O(1)_              |
 | Skiplist   | _O(log n)_          | _O(log n)_          |
 
 \* given a pointer to a location
