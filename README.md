@@ -335,7 +335,7 @@ Define a potential function for the data structure to be the absolute difference
 ### SSet Interface
 
 - Additional nodes with pointers that allow 'skipping'
-- Successor search: **find(x) will return smallest value >= x**
+- Successor search: **find(x) will return smallest value ≥ x**
 - **find(), add(), remove() in O(log n)**
 
 ![sset-interface](SSetInterface.png)
