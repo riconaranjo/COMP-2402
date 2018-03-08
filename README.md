@@ -448,3 +448,56 @@ Define a potential function for the data structure to be the absolute difference
     E[sp] ≤ 2*log(n) + 6
 
     E[sp] = O(log n) + O(1)
+
+## HashTables
+
+- Unordered sets with fast access
+- Associative array
+  - Index elements into a range of int
+  - for non-integer elements, use hashCode()
+
+## Binary Trees
+
+Nodes:
+
+- Root: top-most node
+- Internal: nodes that have children
+- Leaf: nodes with no children
+- External: null nodes [children of leaf nodes]
+
+Definitions:
+
+- Depth: distance from root
+- level: set of nodes at same depth
+- height: largest depth for subtree at node
+- size: number of nodes for subtree at node
+
+How to calculate the size of a subtree [recursively]
+
+``` java
+int size(Node u) {
+    if(u == null) return 0; // external node
+    // add one each time, count this node
+    return size(u.left) + size(u.right) + 1;
+}
+```
+
+How to calculate the height of a subtree [recursively]
+
+``` java
+int height(Node u) {
+    if(u == null) return -1; // external node went too far
+    // add one each time, count this node
+    return max( height(u.left) + height(u.right) ) + 1;
+}
+```
+
+How to calculate the depth of a node [recursively]
+
+``` java
+int depth(Node u) {
+    if(u == null) return -1; // external node went too far
+    // add one each time, count this node
+    return depth(u.parent) + 1;
+}
+```
