@@ -331,9 +331,6 @@ Define a potential function for the data structure to be the absolute difference
 - Like a singly-linked list, with 'skips'
 - Randomly generated structure
 - Faster searches than linked lists
-
-### SSet Interface
-
 - Additional nodes with pointers that allow 'skipping'
 - Successor search: **find(x) will return smallest value ≥ x**
 - **find(), add(), remove() in O(log n)**
@@ -345,10 +342,10 @@ Define a potential function for the data structure to be the absolute difference
 |            | get/set             | add/remove          |
 |------------|---------------------|---------------------|
 | Arrays     | _O(1)_              | _O(1 + min(i,n-i))_ |
-| LinkedList | _O(1 + min(i,n-i))_ | _O(1)_              |
+| LinkedList | _O(1 + min(i,n-i))_ | _O(1)`*`_           |
 | Skiplist   | _O(log n)_          | _O(log n)_          |
 
-\* given a pointer to a location
+`*given a pointer to the location, else traversal is necessary`
 
 ## Definitions
 
@@ -456,7 +453,53 @@ Define a potential function for the data structure to be the absolute difference
   - Index elements into a range of int
   - for non-integer elements, use hashCode()
 
+![hash-table](HashTable.png)
+
+### Hashing
+
+- Computing an [integer] index into the array
+
+### ChainedHashTable
+
+- Implements the **USet** interface
+- **find(), add(), remove() in O(n_i)**
+  - where *n_i* is based of size of list at index
+
+`// m ≥ 1 add() / remove() calls, results in O(m) time on resize()`
+
+### Universal Hashing
+
+    A hash function, hash(x):int -> {0,...,m-1}, is
+    universal if, for any elements x, y:
+
+    1. if x == y, then hash(x) == hash(y)
+
+    2. if x != y, then Prob{ hash(x) == hash(y) } = 1/m
+
+- If a hash function gives probablility of 2/m, then it can be called _nearly-universal_
+
+### HashCodes
+
+Methods of Java Object:
+
+- .hashCode(), integer representation of object
+- .equals(), compare two object references
+
+Equal objects must have equal hash codes
+
+- a.equals(b) => a.hashCode() == b.hashCode()
+
+but, reverse is not true:
+
+- a.hashCode() == b.hashCode() =/> a.equals(b)
+  - Same hashcode does not imply, same object
+- !a.equals(b) =/> a.hashCode() != b.hashCode()
+  - Different object does not mean different hashcode
+
+
 ## Binary Trees
+
+![binary-tree](BinaryTree.png)
 
 Nodes:
 
@@ -486,7 +529,7 @@ How to calculate the height of a subtree [recursively]
 
 ``` java
 int height(Node u) {
-    if(u == null) return -1; // external node went too far
+    if(u == null) return -1; // external node, went too far
     // add one each time, count this node
     return max( height(u.left) + height(u.right) ) + 1;
 }
@@ -496,8 +539,65 @@ How to calculate the depth of a node [recursively]
 
 ``` java
 int depth(Node u) {
-    if(u == null) return -1; // external node went too far
+    if(u == null) return -1; // root node, went too far
     // add one each time, count this node
     return depth(u.parent) + 1;
 }
 ```
+
+### BinarySearchTree
+
+- Implements the **SSet** interface
+- **find(), add(), remove() in O(n)**
+
+### Adding Node to Binary Search Tree
+
+``` java
+boolean addNode(x) {
+    last = FindLast(x);  // successor search
+    if(x == last) return false; // no duplicates
+    if(x.value < last.value)
+        last.right = x;
+    else
+        last.left = x;
+    return true;
+}
+```
+
+### Removing Node from Binary Search Tree
+
+**Case 1:** Node is a leaf [no children]
+
+- Just remove node.
+
+**Case 2:** Node has one child
+
+- Node can be replaced by child node
+
+**Case 3:** Node has two children
+
+- Replace the node with the smallest value, unless in right subtree
+
+### Random Binary Search Trees
+
+Balanced trees are statistically more likely
+
+- Implements the **SSet** interface
+- **contructed in O( n•log(n) )**
+- **add(), remove() in O(n)**
+- **find()) in O(log n)**
+
+`// search path is at most 2•log(n) + O(1)`
+
+### Treaps
+
+**Has an extra priority:**</br>
+Parent priority should be less than child priority.</br>
+This has the property of bounding the height of the tree.
+
+- Implements the **SSet** interface
+- Priorities are randomly applied
+- **contructed in O( n•log(n) )**
+- **find(),add(), remove() in O(log n)**
+
+![treap](Treap.png)

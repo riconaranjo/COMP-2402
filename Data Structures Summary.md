@@ -55,7 +55,7 @@ Efficient insertion / deletion at back [think stack].
 - **add(), remove() in O(1 + n-i)**
 - **resize is O(n)** [amortized]
 
-`// memorize: for m ≥ 1 add() / remove() calls, resize() will copy at most 2m`
+`// for m ≥ 1 add() / remove() calls, resize() will copy at most 2m`
 
 `// the amortized cost of resize() for m calls is 2m/m = O(1)`
 
@@ -102,7 +102,7 @@ Efficient insertion / deletion at back.
 - **get(), set() in O(1)**
 - **add(), remove() in O(1 + n-i)**
 
-`// memorize: m ≥ 1 add() / remove() calls, results on O(m) time on resize()`
+`// m ≥ 1 add() / remove() calls, results on O(m) time on resize()`
 
 ![rootish-array](RootishArray.png)
 
@@ -147,7 +147,7 @@ Expensive access.
 - **get(), set() in O(1 + min(i, n-i)/_b_)**
 - **add(), remove() in O(1 + min(i, n-i)/_b_)**
 
-`// memorize: m ≥ 1 add() / remove() calls, results in O(b•m) time on resize()`
+`// m ≥ 1 add() / remove() calls, results in O(b•m) time on resize()`
 
 ## SkipLists
 
@@ -156,7 +156,62 @@ Randomly generated structure.
 Allows for faster searches.
 
 - Implements the **SortedSet** interface
+- Successor search: **find(x) will return smallest value ≥ x**
 - **get(), set() in O(log n)**
 - **add(), remove() in O(log n)**
 
 ![sset-interface](SSetInterface.png)
+
+## **After Midterm**
+
+## HashTable
+
+- Unordered sets with fast access
+- Associative array
+  - Index elements into a range of int
+  - for non-integer elements, use hashCode()
+
+![hash-table](HashTable.png)
+
+### ChainedHashTable
+
+- Implements the **USet** interface
+- **find(), add(), remove() in O(n_i)**
+  - where *n_i* is based of size of list at index
+
+`// m ≥ 1 add() / remove() calls, results in O(m) time on resize()`
+
+## Binary Tree
+
+- Nodes with up to two child nodes
+
+![binary-tree](BinaryTree.png)
+
+### BinarySearchTree
+
+- Implements the **SSet** interface
+- **find(), add(), remove() in O(n)**
+
+### Random Binary Search Trees
+
+Balanced trees are statistically more likely
+
+- Implements the **SSet** interface
+- **contructed in O( n•log(n) )**
+- **add(), remove() in O(n)**
+- **find()) in O(log n)**
+
+`// search path is at most 2•log(n) + O(1)`
+
+### Treaps
+
+**Has an extra priority:**</br>
+Parent priority should be less than child priority.</br>
+This has the property of bounding the height of the tree.
+
+- Implements the **SSet** interface
+- Priorities are randomly applied
+- **contructed in O( n•log(n) )**
+- **find(),add(), remove() in O(log n)**
+
+![treap](Treap.png)
