@@ -215,3 +215,17 @@ This has the property of bounding the height of the tree.
 - **find(),add(), remove() in O(log n)**
 
 ![treap](Treap.png)
+
+### Scapegoat Tree
+
+BST that with height maintained within O(log n), rebuilt if too unbalanced
+
+- Implements the **SSet** interface
+- Rebuild only one search path that triggered rebuild
+  - this ensures that not entire tree is rebuilt
+- **rebuild() in O(log n) amortized**
+- **find(),add(), remove() in O(log n)**
+
+![scapegoat](Scapegoat.png)
+
+`// m calls to add() / remove (), results in O( m•log(n) time spent on rebuild()`

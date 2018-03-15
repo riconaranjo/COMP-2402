@@ -601,3 +601,25 @@ This has the property of bounding the height of the tree.
 - **find(),add(), remove() in O(log n)**
 
 ![treap](Treap.png)
+
+### Scapegoat Tree
+
+BST that with height maintained within O(log n), rebuilt if too unbalanced
+
+- Implements the **SSet** interface
+- Rebuild only one search path that triggered rebuild
+  - this ensures that not entire tree is rebuilt
+- **rebuild() in O(log n) amortized**
+- **find(),add(), remove() in O(log n)**
+
+![scapegoat](Scapegoat.png)
+
+`// m calls to add() / remove (), results in O( m•log(n) time spent on rebuild()`
+
+## Binary Search Tree Implementations
+
+|            | get/set             | add/remove          |
+|------------|---------------------|---------------------|
+| Arrays     | _O(1)_              | _O(1 + min(i,n-i))_ |
+| LinkedList | _O(1 + min(i,n-i))_ | _O(1)`*`_           |
+| Skiplist   | _O(log n)_          | _O(log n)_          |
