@@ -164,7 +164,7 @@ After a certain point, g(x) will grow as fast [or faster] than f(x)
 
 </br>
 
-![big_o](BigO.png)
+![big_o](img/BigO.png)
 
 ### Tips
 
@@ -240,7 +240,7 @@ e.g. resizing an an array when adding/removing
 
 Allow for efficient access at front and backs.
 
-![array-queue](ArrayQueue.png)
+![array-queue](img/ArrayQueue.png)
 
 #### ArrayQueue
 
@@ -272,7 +272,7 @@ Allow for efficient access at front and backs.
 - **add(), remove() in O(1 + min(i, n-i))**
   - quick to write at front or back, but not middle
 
-![dual-array-deque](DualArrayDeque.png)
+![dual-array-deque](img/DualArrayDeque.png)
 
 #### Potential Function
 
@@ -292,7 +292,7 @@ Define a potential function for the data structure to be the absolute difference
 - **add(), remove() in O(1 + n-i)**
   - quick to write at the back
 
-![rootish-array](RootishArray.png)
+![rootish-array](img/RootishArray.png)
 
 ## Linked Lists
 
@@ -306,7 +306,7 @@ Define a potential function for the data structure to be the absolute difference
 - **push(), pop() in O(1)**
 - **add(), remove() in O(1)**
 
-![linked-list](LinkedList.png)
+![linked-list](img/LinkedList.png)
 
 ### DSList [Doubly-Linked List]
 
@@ -315,7 +315,7 @@ Define a potential function for the data structure to be the absolute difference
 - **get(), set() in O(1 + min(i, n-i))**
 - **add(), remove() in O(1 + min(i, n-i))**
 
-![doubly-linked-list](DoublyLinkedList.png)
+![doubly-linked-list](img/DoublyLinkedList.png)
 
 ### SELList [Space-Efficient Linked List]
 
@@ -335,7 +335,7 @@ Define a potential function for the data structure to be the absolute difference
 - Successor search: **find(x) will return smallest value ≥ x**
 - **find(), add(), remove() in O(log n)**
 
-![sset-interface](SSetInterface.png)
+![sset-interface](img/SSetInterface.png)
 
 ## List Implementations
 
@@ -453,7 +453,7 @@ Define a potential function for the data structure to be the absolute difference
   - Index elements into a range of int
   - for non-integer elements, use hashCode()
 
-![hash-table](HashTable.png)
+![hash-table](img/HashTable.png)
 
 ### Hashing
 
@@ -499,7 +499,7 @@ but, reverse is not true:
 
 ## Binary Trees
 
-![binary-tree](BinaryTree.png)
+![binary-tree](img/BinaryTree.png)
 
 Nodes:
 
@@ -600,7 +600,7 @@ This has the property of bounding the height of the tree.
 - **contructed in O( n•log(n) )**
 - **find(),add(), remove() in O(log n)**
 
-![treap](Treap.png)
+![treap](img/Treap.png)
 
 ### Scapegoat Tree
 
@@ -612,14 +612,98 @@ BST that with height maintained within O(log n), rebuilt if too unbalanced
 - **rebuild() in O(log n) amortized**
 - **find(),add(), remove() in O(log n)**
 
-![scapegoat](Scapegoat.png)
+![scapegoat](img/Scapegoat.png)
 
 `// m calls to add() / remove (), results in O( m•log(n) time spent on rebuild()`
 
 ## Binary Search Tree Implementations
+
+// todo: fill out this table
 
 |            | get/set             | add/remove          |
 |------------|---------------------|---------------------|
 | Arrays     | _O(1)_              | _O(1 + min(i,n-i))_ |
 | LinkedList | _O(1 + min(i,n-i))_ | _O(1)`*`_           |
 | Skiplist   | _O(log n)_          | _O(log n)_          |
+
+## Heaps + Heap Sort
+
+// todo: fill this section out
+
+## Sorting Alogrithms
+
+// todo: fill this section out
+
+## Graphs
+
+A graph is a pair of sets: G(V,E)
+
+- **V** is the set of all vertices
+- **E** is the set of all edges
+
+![graph](img/graph.png)
+
+### Graph Interface
+
+Interface that defines characteristics of a graph
+
+- **addEdge(i,j):** adds an edge between nodes i and j
+- **emoveEdge(i,j):** removes edge between nodes i and j
+- **hasEdge(i,j):** returns true if edge exists between nodes i and j
+- **outEdges(i):** returns set of all outbound edges from node i
+- **inEdges(i):** returns set of all inbound edges from node i
+
+|            | Adjacency Matrix    | Adjacency List      |
+|------------|---------------------|---------------------|
+| addEdge    | _O(1)_              | _O(1)_              |
+| removeEdge | _O(1)_              | _O(deg(i))_         |
+| hasEdge    | _O(1)_              | _O(deg(i))_         |
+| outEdge    | _O(n)_              | _O(1)_              |
+| inEdge     | _O(n)_              | _O(n+m)_            |
+|            |                     |                     |
+| space used | _O(n^2)_            | _O(n+m)_            |
+
+`• n is the number of nodes`</br>
+`• m is the number of edges`
+
+### Adjacency List
+
+Stores all outbound edges from a node.
+
+- Is better to use than **Adjacency Matrix** if memory restricted, or for outEdges()
+
+e.g.
+
+| Source Node (n) | Adjacent Nodes (m) |
+|-----------------|--------------------|
+| 0               | 2,4,5,6            |
+| 1               | 2,3                |
+| 2               | 5                  |
+| 3               | 0,6,3              |
+| 4               | 1,2,3,5,6          |
+| 5               | 0,6                |
+| 6               | 4,6                |
+
+### Graph Traversal
+
+We can use Breadth-first or Depth-first search order to visit every node.
+
+#### Breadth-first Search
+
+Go through all adjacent nodes first the.
+
+- Good for finding quickest paths from one node to another [but not unique paths].
+  - There could be equally quick paths not found
+
+#### Depth-first Search
+
+Go through list based of a priority.
+
+- Good for finding node with highest / lowest priority?
+
+It is better to use **Adjacency List** for traversals.
+
+|            | Adjacency Matrix    | Adjacency List      |
+|------------|---------------------|---------------------|
+| Breadth    | _O(n^2)_            | _O(n+m)_            |
+| Depth      | _O(n^2)_            | _O(n+m)_            |
