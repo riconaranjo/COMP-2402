@@ -187,19 +187,19 @@ Allows for faster searches.
 
 ![binary-tree](BinaryTree.png)
 
-### BinarySearchTree
+### Binary Search Tree [BST]
 
 - Implements the **SSet** interface
 - **find(), add(), remove() in O(n)**
 
-### Random Binary Search Trees
+### Random Binary Search Trees [RBST]
 
 Balanced trees are statistically more likely
 
 - Implements the **SSet** interface
 - **contructed in O( n•log(n) )**
-- **add(), remove() in O(n)**
-- **find()) in O(log n)**
+- ** in O(n)**
+- **find(), add(), remove() in O(log n)**
 
 `// search path is at most 2•log(n) + O(1)`
 
@@ -212,7 +212,7 @@ This has the property of bounding the height of the tree.
 - Implements the **SSet** interface
 - Priorities are randomly applied
 - **contructed in O( n•log(n) )**
-- **find(),add(), remove() in O(log n)**
+- **find(), add(), remove() in O(log n)**
 
 ![treap](Treap.png)
 
@@ -224,8 +224,51 @@ BST that with height maintained within O(log n), rebuilt if too unbalanced
 - Rebuild only one search path that triggered rebuild
   - this ensures that not entire tree is rebuilt
 - **rebuild() in O(log n) amortized**
-- **find(),add(), remove() in O(log n)**
+- **find(), add(), remove() in O(log n)**
 
 ![scapegoat](Scapegoat.png)
 
 `// m calls to add() / remove (), results in O( m•log(n) time spent on rebuild()`
+
+### 2-4 Tree
+
+Tree where every leaf has the same depth.
+
+- Implements the **SSet** interface
+- All leaves have equal depth
+- All internal nodes have 2-4 children
+- **find(), add(), remove() in O(log n) [worst case]**
+
+![24Tree](img/24Tree.png)
+
+### RedBlack Tree
+
+A self-balancing binary search tree, built off a 2-4 Tree, where each node has a 'colour'.
+
+- Implements the **SSet** interface
+- Uses colour to remain balanced when adding / removing
+  - There is the same number of black nodes on every root to leaf path
+  - i.e. equal sum of colours on any root to leaf path
+- No red nodes can be adjacent
+  - red nodes must have black parent
+- left-leaning: if left node is black, then right node must be black
+- **Maximum height of 2•log(n)**
+- **find(),add(), remove() in O(log n) [worst case]**
+
+## Binary Search Tree Implementations
+
+|                       | find()                 | add()                  | remove()               |
+|------------------|------------------------|------------------------|------------------------|
+| BST                   | _O(n)_                 | _O(n)_                 | _O(n)_                 |
+| RBST / Treaps         | _O(log n)_ [expected]  | _O(log n)_ [expected]  | _O(log n)_ [expected]  |
+| Scapegoat Trees       | _O(log n)_ [amortized] | _O(log n)_ [amortized] | _O(log n)_ [amortized] |
+| 2-4 / RedBlack Trees  | _O(log n)_ [worst case] | _O(log n)_ [worst case] | _O(log n)_ [worst case] |
+
+### Sorted Set Implementations
+
+|                          | Runtime                 |
+|--------------------------|-------------------------|
+| Skiplists                | _O(log n)_ [expected]   |
+| Treaps                   | _O(log n)_ [expected]   |
+| Scapegoat Trees          | _O(log n)_ [amortized]  |
+| **2-4 / RedBlack Trees** | _O(log n)_ [worst case] |

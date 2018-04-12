@@ -96,7 +96,7 @@ dq.addLast("last");
 ## Priority Queue
 
 Essentially: uses a heap instead of a tree, in order to keep a certain one on top.
-So first element is 'sorted' and then rest is unsorted. 
+So first element is 'sorted' and then rest is unsorted.
 
 Not good for sorting, or random access.
 
@@ -152,7 +152,7 @@ After a certain point, g(x) will grow as fast [or faster] than f(x)
 
 ### Orders of growth
 
-| Complexity   | Name         | 
+| Complexity   | Name         |
 |:-------------|:-------------|
 | O(1)         | Constant     |
 | O(log n)     | Logarithmic  |
@@ -496,7 +496,6 @@ but, reverse is not true:
 - !a.equals(b) =/> a.hashCode() != b.hashCode()
   - Different object does not mean different hashcode
 
-
 ## Binary Trees
 
 ![binary-tree](img/BinaryTree.png)
@@ -545,7 +544,7 @@ int depth(Node u) {
 }
 ```
 
-### BinarySearchTree
+### Binary Search Tree [BST]
 
 - Implements the **SSet** interface
 - **find(), add(), remove() in O(n)**
@@ -578,14 +577,13 @@ boolean addNode(x) {
 
 - Replace the node with the smallest value, unless in right subtree
 
-### Random Binary Search Trees
+### Random Binary Search Trees [RBST]
 
 Balanced trees are statistically more likely
 
 - Implements the **SSet** interface
 - **contructed in O( n•log(n) )**
-- **add(), remove() in O(n)**
-- **find()) in O(log n)**
+- **add(), remove(), find()) in O(log n)**
 
 `// search path is at most 2•log(n) + O(1)`
 
@@ -598,7 +596,7 @@ This has the property of bounding the height of the tree.
 - Implements the **SSet** interface
 - Priorities are randomly applied
 - **contructed in O( n•log(n) )**
-- **find(),add(), remove() in O(log n)**
+- **find(), add(), remove() in O(log n)**
 
 ![treap](img/Treap.png)
 
@@ -610,7 +608,7 @@ BST that with height maintained within O(log n), rebuilt if too unbalanced
 - Rebuild only one search path that triggered rebuild
   - this ensures that not entire tree is rebuilt
 - **rebuild() in O(log n) amortized**
-- **find(),add(), remove() in O(log n)**
+- **find(), add(), remove() in O(log n)**
 
 ![scapegoat](img/Scapegoat.png)
 
@@ -618,13 +616,62 @@ BST that with height maintained within O(log n), rebuilt if too unbalanced
 
 ## Binary Search Tree Implementations
 
-// todo: fill out this table
+|                       | find()                 | add()                  | remove()               |
+|------------------|------------------------|------------------------|------------------------|
+| BST                   | _O(n)_                 | _O(n)_                 | _O(n)_                 |
+| RBST / Treaps         | _O(log n)_ [expected]  | _O(log n)_ [expected]  | _O(log n)_ [expected]  |
+| Scapegoat Trees       | _O(log n)_ [amortized] | _O(log n)_ [amortized] | _O(log n)_ [amortized] |
+| 2-4 / RedBlack Trees  | _O(log n)_ [worst case] | _O(log n)_ [worst case] | _O(log n)_ [worst case] |
 
-|            | get/set             | add/remove          |
-|------------|---------------------|---------------------|
-| Arrays     | _O(1)_              | _O(1 + min(i,n-i))_ |
-| LinkedList | _O(1 + min(i,n-i))_ | _O(1)`*`_           |
-| Skiplist   | _O(log n)_          | _O(log n)_          |
+### Sorted Set Implementations
+
+|                          | Runtime                 |
+|--------------------------|-------------------------|
+| Skiplists                | _O(log n)_ [expected]   |
+| Treaps                   | _O(log n)_ [expected]   |
+| Scapegoat Trees          | _O(log n)_ [amortized]  |
+| **2-4 / RedBlack Trees** | _O(log n)_ [worst case] |
+
+### 2-4 Tree
+
+Tree where every leaf has the same depth.
+
+- Implements the **SSet** interface
+- All leaves have equal depth
+- All internal nodes have 2-4 children
+- **find(), add(), remove() in O(log n) [worst case]**
+
+![24Tree](img/24Tree.png)
+
+### RedBlack Tree
+
+A self-balancing binary search tree, built off a 2-4 Tree, where each node has a 'colour'.
+
+- Implements the **SSet** interface
+- Uses colour to remain balanced when adding / removing
+  - There is the same number of black nodes on every root to leaf path
+  - i.e. equal sum of colours on any root to leaf path
+- No red nodes can be adjacent
+  - red nodes must have black parent
+- left-leaning: if left node is black, then right node must be black
+- **Maximum height of 2•log(n)**
+- **find(),add(), remove() in O(log n) [worst case]**
+
+![redblack](img/RedBlack.png)
+
+#### Adding Node to RedBlack Tree
+
+Case 0: black parent...
+
+**Case 1:** Adding red node with red parent, but black uncle
+
+- Rotate left or right at black grandparent
+
+**Case 2:** Adding red node with red parent and red uncle
+
+- make grandparent red, and parent and uncle black
+
+![adding-red-node](img/AddingRedNode.png)
 
 ## Heaps + Heap Sort
 
@@ -695,11 +742,29 @@ Go through all adjacent nodes first the.
 - Good for finding quickest paths from one node to another [but not unique paths].
   - There could be equally quick paths not found
 
+**Process:**
+
+- You do this with a queue and list
+  - queue stores position we are at
+    - add all adjacent nodes to queue
+    - remove values when cannot to any other unseen node
+    - check if we have seen them
+  - list stores nodes we have seen
+
 #### Depth-first Search
 
 Go through list based of a priority.
 
 - Good for finding node with highest / lowest priority?
+
+**Process:**
+
+- You do this with a stack and list
+  - stack stores position we are at
+    - add all adjacent nodes to stack
+    - remove values when cannot to any other unseen node
+    - check if we have seen them
+  - list stores nodes we have seen
 
 It is better to use **Adjacency List** for traversals.
 
