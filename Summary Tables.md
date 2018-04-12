@@ -21,7 +21,7 @@ These are all the tables summarizing the comparisons between different data stru
 | Scapegoat Trees       | _O(log n)_ [amortized] | _O(log n)_ [amortized] | _O(log n)_ [amortized] |
 | 2-4 / RedBlack Trees  | _O(log n)_ [worst-case] | _O(log n)_ [worst-case] | _O(log n)_ [worst-case] |
 
-### Sorted Set Implementations
+## Sorted Set Implementations
 
 |                          | Runtime                 |
 |--------------------------|-------------------------|
@@ -29,3 +29,11 @@ These are all the tables summarizing the comparisons between different data stru
 | Treaps                   | _O(log n)_ [expected]   |
 | Scapegoat Trees          | _O(log n)_ [amortized]  |
 | **2-4 / RedBlack Trees** | _O(log n)_ [worst-case] |
+
+## Comparison-based Algorithms
+
+|            | Comparisons                      | In-place | Stable |
+|------------|----------------------------------|----------|--------|
+| Merge Sort | _n•log(n)_ [worst-case]          | no       | yes    |
+| Heap Sort  | _1.38n•log(n) + O(n)_ [expected] | yes      | no     |
+| Quick Sort | _2n•log(n) + O(n)_ [worst-case]  | yes      | no     |
