@@ -237,7 +237,7 @@ Tree where every leaf has the same depth.
 - Implements the **SSet** interface
 - All leaves have equal depth
 - All internal nodes have 2-4 children
-- **find(), add(), remove() in O(log n) [worst case]**
+- **find(), add(), remove() in O(log n) [worst-case]**
 
 ![24Tree](img/24Tree.png)
 
@@ -253,7 +253,7 @@ A self-balancing binary search tree, built off a 2-4 Tree, where each node has a
   - red nodes must have black parent
 - left-leaning: if left node is black, then right node must be black
 - **Maximum height of 2•log(n)**
-- **find(),add(), remove() in O(log n) [worst case]**
+- **find(),add(), remove() in O(log n) [worst-case]**
 
 ## Binary Search Tree Implementations
 
@@ -262,7 +262,7 @@ A self-balancing binary search tree, built off a 2-4 Tree, where each node has a
 | BST                   | _O(n)_                 | _O(n)_                 | _O(n)_                 |
 | RBST / Treaps         | _O(log n)_ [expected]  | _O(log n)_ [expected]  | _O(log n)_ [expected]  |
 | Scapegoat Trees       | _O(log n)_ [amortized] | _O(log n)_ [amortized] | _O(log n)_ [amortized] |
-| 2-4 / RedBlack Trees  | _O(log n)_ [worst case] | _O(log n)_ [worst case] | _O(log n)_ [worst case] |
+| 2-4 / RedBlack Trees  | _O(log n)_ [worst-case] | _O(log n)_ [worst-case] | _O(log n)_ [worst-case] |
 
 ### Sorted Set Implementations
 
@@ -271,4 +271,17 @@ A self-balancing binary search tree, built off a 2-4 Tree, where each node has a
 | Skiplists                | _O(log n)_ [expected]   |
 | Treaps                   | _O(log n)_ [expected]   |
 | Scapegoat Trees          | _O(log n)_ [amortized]  |
-| **2-4 / RedBlack Trees** | _O(log n)_ [worst case] |
+| **2-4 / RedBlack Trees** | _O(log n)_ [worst-case] |
+
+## Binary Heaps
+
+A complete Binary Tree that also maintains the heap property.
+
+- Implements the [priority] **Queue Interface**
+- Allows to find / remove most extreme node with peek() / remove()
+- **add(), remove() in O(log n)**
+- **peek() in O(1)**
+
+![binary-heap](img/BinaryHeap.png)
+
+`// m ≥ 1 add() / remove() calls, results in O(m) time on resize()`

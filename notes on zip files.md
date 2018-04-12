@@ -14,11 +14,13 @@ This command will comiple the java file and output any compilation errors.
 
     javac PartX.java
 
-## Running Java Programs Using Terminal [Assignment 1]
+## Running Java Programs Using Terminal
 
-This command will run the compiled Java code, take the `testX-01.in` file as input and write to the `testX-01.in` file.
+### Assignment 1
 
-java comp2402a1.PartX tests/testX-01.in tests/testX-01.out
+This command will run the compiled Java code, take the `testX-01.in` file as input and write to the `testX-01.in` file [replace X with part number].
+
+    java comp2402a1.PartX tests/testX-01.in tests/testX-01.out
 
 ### For copying and pasting
 

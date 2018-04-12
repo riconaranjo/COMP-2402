@@ -621,7 +621,7 @@ BST that with height maintained within O(log n), rebuilt if too unbalanced
 | BST                   | _O(n)_                 | _O(n)_                 | _O(n)_                 |
 | RBST / Treaps         | _O(log n)_ [expected]  | _O(log n)_ [expected]  | _O(log n)_ [expected]  |
 | Scapegoat Trees       | _O(log n)_ [amortized] | _O(log n)_ [amortized] | _O(log n)_ [amortized] |
-| 2-4 / RedBlack Trees  | _O(log n)_ [worst case] | _O(log n)_ [worst case] | _O(log n)_ [worst case] |
+| 2-4 / RedBlack Trees  | _O(log n)_ [worst-case] | _O(log n)_ [worst-case] | _O(log n)_ [worst-case] |
 
 ### Sorted Set Implementations
 
@@ -630,7 +630,7 @@ BST that with height maintained within O(log n), rebuilt if too unbalanced
 | Skiplists                | _O(log n)_ [expected]   |
 | Treaps                   | _O(log n)_ [expected]   |
 | Scapegoat Trees          | _O(log n)_ [amortized]  |
-| **2-4 / RedBlack Trees** | _O(log n)_ [worst case] |
+| **2-4 / RedBlack Trees** | _O(log n)_ [worst-case] |
 
 ### 2-4 Tree
 
@@ -639,7 +639,7 @@ Tree where every leaf has the same depth.
 - Implements the **SSet** interface
 - All leaves have equal depth
 - All internal nodes have 2-4 children
-- **find(), add(), remove() in O(log n) [worst case]**
+- **find(), add(), remove() in O(log n) [worst-case]**
 
 ![24Tree](img/24Tree.png)
 
@@ -655,7 +655,7 @@ A self-balancing binary search tree, built off a 2-4 Tree, where each node has a
   - red nodes must have black parent
 - left-leaning: if left node is black, then right node must be black
 - **Maximum height of 2•log(n)**
-- **find(),add(), remove() in O(log n) [worst case]**
+- **find(),add(), remove() in O(log n) [worst-case]**
 
 ![redblack](img/RedBlack.png)
 
@@ -673,13 +673,52 @@ Case 0: black parent...
 
 ![adding-red-node](img/AddingRedNode.png)
 
-## Heaps + Heap Sort
+## Heaps
 
-// todo: fill this section out
+**Heap Property:** Each node is more extreme than [or equal to] its parent.
+
+### Binary Heaps
+
+A complete Binary Tree that also maintains the heap property.
+
+- Implements the [priority] **Queue Interface**
+- Allows to find / remove most extreme node with peek() / remove()
+- **add(), remove() in O(log n)**
+- **peek() in O(1)**
+
+![binary-heap](img/BinaryHeap.png)
+
+`// m ≥ 1 add() / remove() calls, results in O(m) time on resize()`
+
+### Meldable Heap
+
+A randomized heap, not bound by an shape or balancing.
+
+- Implements the [priority] **Queue Interface**
+- Simpler to implement, and good worst-case time efficiency
+- **add(), remove() in O(log n)**
+
+### Random Walks
+
+A path through a binary tree [i.e. the expected depth of a node].
+
+- Starting from root node
+- Random chance to go to left to right child
+- Ends at external nodes
+
+`// The expected depth of a node is ≤ log(n+1)`
 
 ## Sorting Alogrithms
 
-// todo: fill this section out
+### HeapSprt
+
+Sorting algorithm that uses a heap.
+
+- Comparison based
+- **In-place**
+- **Runs in O(n•log(n))**
+
+`// performs at most 2n•log(n) + O(n) comparisons`
 
 ## Graphs
 

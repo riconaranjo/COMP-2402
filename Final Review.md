@@ -1,4 +1,4 @@
-# Comp2402: Review Questions
+# Final Review Questions
 
 ## 1: JCF & Big-Oh
 
