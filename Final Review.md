@@ -38,57 +38,106 @@
 
 ### 1.2 Java Collections Framework - Interfaces
 
-All of these questions should be considered in the context of the interfaces in the JCF
+All of these questions should be considered in the context of the interfaces in the JCF.
 
 1. Explain the differences and similarities between a Set and a List.
 
-    A Set has no duplicates, whereas a List may have duplicates.
-    A List has an order to its elements, wheras a set is unordered.
+    - A Set has no duplicates, whereas a List may have duplicates.
+    - A List has an order to its elements, wheras a set is unordered.
+        - List elements can be accessed with an index [quick get]
+        - Set elements can be added / removed easily
+    - Both contain elements.
+    - Sorted Sets have successor search
 
 2. Explain the difference between a Collection and a Map. Could it also make sense to have Map be a subclass of Collection?
 
+    A Collection contains values but no key
+
+    - Ordered or Unorded
+
+    A Map organizes values based of a key [key-value pairs]
+
+    - It is possible to find a value knowing only a key
+    - No duplicate entries
+    - Unordered
+
 3. Which of the JCF interfaces would be the most useful if we want to store a collection of students enrolled in COMP2402 so that we can quickly check if a student is enrolled in COMP2402?
+
+    USet: if we are only storing name or student number [or both together as one value]
+    HashTable: has quick contains() if we are storing name and student number seperately
 
 4. How does your answer to the previous question change if we also want to store some auxiliary information (e.g., a mark) with each student.
 
+    HashTable: unordered Map, quick for contains()
+
 5. A Bag is like a set except that elements can be stored more than once. Explain how you could implement a Bag using a Map.
+
+    You can implement Bag interface by using key as the identifier for the element, and value as a counter for how many instances of this element are in the bag.
 
 ### 1.3 Java Collections Framework - Implementations
 
 1. Explain why it is important that elements that are stored in a Set or Map aren't modified in a way that affects the outcome of the equals() method.
 
+    This is important because...
+
 2. Describe the running time of the methods get(i) and set(i,x) for an ArrayList versus a LinkedList.
+
+    ArrayList is quicker since no need to traverse.
+    - O(1)
+
+    LinkedList traversal is minimized if doubly linked list
+    - O(min(n-i, i) + 1)
 
 3. Describe the running time of the method add(i,x) for an ArrayList versus a LinkedList.
 
-4. For each of the following methods, decide if it is fast or slow when (a) l is an ArrayList and (b) when l is a LinkedList.
+    ArrayList is good for adding or removing at the front / back because no need to shift elements. [Assume ArrayDeque with quick access to front / back]
+    - O(min(n-i,1) + 1)
+    LinkedList is good for adding anywhere, as long as there is a pointer to the location being added to, otherwise traversal through each element is needed.
+    - O(1) [given pointer to location]
+
+4. For each of the following methods, decide if it is fast or slow when:
+
+    **(a)** l is an ArrayList</br>
+    **(b)** when l is a LinkedList.
 
     ``` java
+    // Good for ArrayList
+    // Good for LinkedList
     public static void frontGets(List<Integer> l, int n) {
         for (int i = 0; i < n; i++) {
             l.get(0);
         }
     }
+    // Good for ArrayList
+    // Good for LinkedList
     public static void backGets(List<Integer> l, int n) {
         for (int i = 0; i < n; i++) {
             l.get(l.size()-1);
         }
     }
+    // Good for ArrayList
+    // Bad for LinkedList
     public static void randomGets(List<Integer> l, int n) { Random gen = new Random();
         for (int i = 0; i < n; i++) {
             l.get(gen.nextInt(l.size()));
         }
     }
+    // Good for ArrayList
+    // Good for LinkedList
     public static void insertAtBack(List<Integer> l, int n) {
         for (int i = 0; i < n; i++) {
             l.add(new Integer(i));
         }
     }
+    // Bad for ArrayList, unless ArrayDeque
+    // Good for LinkedList
     public static void insertAtFront(List<Integer> l, int n) {
         for (int i = 0; i < n; i++) {
             l.add(0, new Integer(i));
         }
     }
+    // Bad for ArrayList, Unless DualArrayDeque
+    // Good for LinkedList
     public static void insertInMiddle(List<Integer> l, int n) {
         for (int i = 0; i < n; i++) {
             l.add(new Integer(i));
@@ -117,19 +166,44 @@ public class ArrayStack<T> extends AbstractList<T> {
 
 1. Describe the implementation and running times of the operations get(i) and set(i,x) in an ArrayStack.
 
-2. Recall that the length of the backing array a in an ArrayStack doubles when we try to add an element and n+1> a.length. Explain, in general termswhy we choose to double rather than just add 1 or a constant.
+    An ArrayStack is just an array with access only to back. Superceded by an ArrayDeque.
+
+    - get(), set() in O(1)
+
+2. Recall that the length of the backing array a in an ArrayStack doubles when we try to add an element and n + 1 > a.length. Explain, in general terms why we choose to double rather than just add 1 or a constant.
+
+    Better to double size of the backing array because otherwise we would have to resize after each element that is added. A constant isn't used because if you have a small list you don't want 100 unused spaces, but when working with large sets with highly variable size you don't want to be resizing every 100 if you are adding or removing 1000 each second.
+
+    A dynamic number that is relative to the size of the stack is best.
 
 3. Recall that, immediately after an ArrayStack is resized it has a.length = 2*n.
 
     **a.** If we are currently about to grow the backing array a, what can you say about the number of add() and remove() operations since the last time the ArrayStack was resized?
 
+    At least n/2 add or remove operations.
+
+    - If we have n items:
+        - Growing: last time it was resized it had n/2 items before [n/2 calls]
+
     **b.** Recall that we shrink the back array a when 3*n < a.length. If we are currently about to shrink the backing array a, what can you say about the number of add() and remove() operations since the last time the ArrayStack was resized?
+
+    We had 3n items before
+    - so at least 2n calls
 
 4. From the previous question, what can you conclude about the total number of elements copied by resize() if we start with an empty ArrayStack and perform m add() and remove() operations?
 
+    At most 2m items will be copied for ArrayStack/ArrayQueue/ArrayDeque after m calls.
+
 5. What is the amortized (or average) running time of the add(i,x) and remove(i) operations, as a function of i and size().
 
+    add / remove: O(n-i+1) + 1
+    - Quick to add to back
+
+    get / set: O(1)
+
 6. Why is the name ArrayStack a suitable name for this data structure?
+
+    It is suitable because it implements the Stack Interface, FILO, and is implemented using arrays.
 
 ### 2.2 ArrayDeques
 
@@ -144,13 +218,31 @@ public class ArrayDeque<T> extends AbstractQueue<T> {
 }
 ```
 
-1. Describe, in words, how to perform an add(i,x) operation (a) if i < n/2 and (b) if i>=n/2.
+1. Describe, in words, how to perform an add(i,x) operation
+    **(a)** if i < n/2
+    **(b)** if i ≥ n/2.
+
+    ArrayDeque appears like a circular array, no need to worry about the actual front or back of the array.
+
+    - If the index is less than n/2, then shift values left since fewer values to shift.
+    - Else, shift values right
+
+    - There is a private index j which stores where the first value is:
+    - i < n/2, j--
+    - i ≥ n/2, j = j
 
 2. What is the running time of add(i,x) and remove(i) operations as a function of i and size()?
 
+    ArrayDeque is faster than ArrayStack because it has front access
+    - O(min(n-i,i) + 1)
+
 3. Describe, in words, why using System.arraycopy() to perform shifting of elements in the add(i,x) and remove(i) operations is so much more complicated for an ArrayDeque than an ArrayStack.
 
-4. Explain why, using an example, if a.length is a power of 2, then x mod a.length = x & (a.length-1). Why is this relevant when discussing ArrayDeques?
+    Because the first index in the backing array does not necessarily correspond to the first index of the ArrayDeque.
+
+4. Explain why, using an example, if a.length is a power of 2, then x % a.length = x & (a.length-1). Why is this relevant when discussing ArrayDeques?
+
+    This is relavant because you can check if the front of the ArrayDeque is pointing to the last index in the backing array, so it can be reset to the 0th index if an element is added.
 
 ### 2.3 DualArrayDeques
 
@@ -164,15 +256,16 @@ public class DualArrayDeque<T> extends AbstractList<T> {
 }
 ```
 
-1. If the elements of the list are x0, ... xn-1, describe how these are distributed among front and back and in what order they appear.
+1. If the elements of the list are x(0, ... x_(n-1), describe how these are distributed among front and back and in what order they appear.
 
-2. Recall that we rebalance the elements among front and back when front.size()*3 < back.size() or vice versa. After we rebalance, we have front.size() == back.size() +/- 1. What does this tell us about the number of add() and remove() operations between two consecutive rebalancing operations?
+2. Recall that we rebalance the elements among front and back when 3•front.size() < back.size() or vice versa. After we rebalance, we have front.size() == back.size() ± 1. What does this tell us about the number of add() and remove() operations between two consecutive rebalancing operations?
 
     This means that we had at least n/2 calls to add() / remove().
 
     - assume initially balanced arrays
     - each array has n/2
-    - after rebalancing, front array has n/4, and back array has 3n/4
+    - before rebalancing, front array had n/4, and back array has 3n/4
+        - difference of n/2
     - this means that there was n/2 add() / remove(), (where n is the final size)
 
 ### 2.4 RootishArrayStacks
@@ -189,11 +282,22 @@ public class RootishArrayStack<T> extends AbstractList<T> {
 
 1. If a RootishArrayStack has r blocks, then how many elements can it store?
 
+    Each block stores r elements, so r+(r-1)+(r-2)..1 elements
+
+    Geometric Series: r(r+1) / 2
+
 2. Explain how this leads to the equation:
 
         b(b+1)/2 < i+1 < (b+1)(b+2)/2
 
+    - The number of indices less than or equal to i are i+1 [inclusive of element i]
+    - The block at which i is contained must be at least b(b+1)/2
+    - But cannot be within the next block given by b+1(b+2)/2
+
 3. In a RootishArrayStack that contains n elements, what is the maximum amount of space used that is not dedicated to storing data?
+
+    The amount of wasted space in a RootishArrayStack is sqrt(n)
+    - Makes it memory-efficient
 
 ## 3: Linked Lists
 
@@ -216,13 +320,32 @@ public class SLList<T> extends AbstractQueue<T> {
 
 1. Draw a picture of an SLList containing the values a, b, c, and d. Be sure to show the head and tail pointers.
 
+    ...in markdown? [nah]
+
 2. Consider how to implement a Queue as an SLList. When we enqueue (add(x)) an element, where does it go? When we dequeue (remove()) an element, where does it come from?
+
+    A queue can be created with two pointers: head and tail
+
+    - The tail should be here new nodes are added to, so they can point to the existing queue
+    - Removals should be made at the head, so that head.next becomes the new head
 
 3. Consider how to implement a Stack as an SLList. When we push an element where does it go? When we pop an element where does it come from?
 
+    Only one pointer is needed: head
+
+    - Insertion and removals should be done at the head
+
 4. How quickly can we find the ith node in an SLList?
 
+    Quick to find if near the front [head]
+    - O(1+i)
+
 5. Explain why we can't have an efficient implementation of a Deque using an SLList.
+
+    You don't have quick access to the predecessor to the tail
+
+    - Tail is only good for insertion
+    - Can be fixed with doubly linked list 
 
 ### 3.2 Doubly-Linked Lists
 
@@ -242,9 +365,14 @@ public class DLList<T> extends AbstractSequentialList<T> {
 
 1. Explain the role of the dummy node. In particular, what are dummy.next and dummy.prev?
 
+    The dummy node stores the pointers to the front and back nodes
+    - dummy.next is the head
+    - dummy.prev is the tail
+
 2. One of the following two functions correctly adds a node u before the node p in the DLList, the other one is incorrect. Which one is correct?
 
     ``` java
+    // correct implementation
     protected Node add(Node u, Node p){
         u.next = p;
         u.prev = p.prev;
@@ -253,9 +381,10 @@ public class DLList<T> extends AbstractSequentialList<T> {
         n++;
         return u;
     }
+    // incorrect implementation
     protected Node add(Node u, Node p){
         u.next = p;
-        u.next.prev = u;
+        u.next.prev = u;    // this overwrites p.prev
         u.prev = p.prev;
         u.prev.next = u;
         n++;
@@ -265,15 +394,31 @@ public class DLList<T> extends AbstractSequentialList<T> {
 
 3. What is the running-time of add(i,x) and remove(i) in a DLList?
 
+    Quick if no traversal is needed O(1) given a pointer.
+
+    - O(min(n-i) + 1) [minimized traversal]
+
 ### 3.3 Space-Efficient Doubly-Linked-Lists
 
-Recall that a space efficient doubly-linked list implements the List interface by storing a sequence of blocks (arrays) each containing b +/- 1 elements.
+Recall that a space efficient doubly-linked list implements the List interface by storing a sequence of blocks (arrays) each containing b ± 1 elements.
+
+    The wasted space is divided by b, but adds b blocks
+
+    - n + O(n/b + b)
 
 1. What is the running-time of get(i) and set(i) in a space-efficient doubly-linked list?
 
+    Traversals are reduced by b blocks
+    - O(min(n-i,i)/b + 1)
+
 2. What is the amortized running time of the add(i) operation in a space-efficient doubly-linked list?
 
+    Same as regular SLL, but divided by b blocks
+    - O(min(n-i)/b + 1)
+
 3. In a space-efficient doubly-linked list containing n elements, what is the maximum amount of space that is not devoted to storing data?
+
+    Wasted space: n pointers + O(n/b + b)
 
 ## 4: SkipLists
 
@@ -281,15 +426,38 @@ Recall that a skiplist stores elements in a sequence of smaller and smaller list
 
 1. Draw an example of a skiplist select a few elements and show the search paths for these elements
 
+    Like a regualar SLL with extra randomized nodes for skipping forward
+
 2. Explain how the reverse search path is related to the following experiment: Toss a coin repeatedly until the first time the coin comes up heads.
+
+    The expected search path can be described as the expected coin flip, since each additional height in a node due to a probability.
 
 3. If there are n elements in L0, what is the expected number of elements in L1? What about in Li?
 
+    L1 = L0/2 = n/2 because there is a P(height++) = 0.5
+    - L0 contains all node levels with 0 skips to next node [also known as all elements]
+
+    Li = i/2
+
 4. If there are n elements in L0, give an upper bound on the expected length of the search path for any particular element.
+
+    O(log n)
+    - specifically 2•log(n) + O(1)
 
 5. Explain, briefly, how a skiplist can be used to implement the SortedSet interface. What are the running times of operations add(x), remove(x), and contains(x)?
 
+    Define the length of a skip [edge].
+
+    Contains:
+    - Go right if the next node is less than value
+    - Go down if next node is greater than
+    - This is a successor search
+
+    add(), remove(), contains() runs in O(log n)
+
 6. Explain, briefly, how a skiplist can be used to implement the List interface. What are the running times of the operations add(i,x), remove(i), get(i,x), and set(i,x).
+
+    add(), remove(), get(), set() runs in O(log n) [expected]
 
 ## 5: Hash tables
 
@@ -298,11 +466,16 @@ Recall that a skiplist stores elements in a sequence of smaller and smaller list
 2. Recall the multiplicative hash function hash(x) = (x.hashCode() * z) >>> w-d.
 
     a. In 32-bit Java, what is the value of w?
-    b. How large is the table that is used with this hash function? (In other words, what is the range
-    of this hash function?)
+        - 32 bits...
+    b. How large is the table that is used with this hash function? (In other words, what is the range of this hash function?)
+        - d?
     c. Write this function in more standard mathematical notation using the mod and div (integer division) operators.
+        hash(x) = (z•x) mod 2^w ) div 2^(w-d)
 
 3. Explain the relationship between a class's hashCode() method and its equals(o) method.
+
+    Two objects with equal values will return the same hash codes
+    - a.equals(b) => a.hashCode() == b.hasCode()
 
 4. Explain, in words, what is wrong with the following hashCode() method:
 
@@ -318,6 +491,10 @@ Recall that a skiplist stores elements in a sequence of smaller and smaller list
 
     Give an example of many points that all have the same hashCode().
 
+    - If '^' is exponent The point 1,2 will return the same hash code as 2,1, and any two point with the same values will return the same hash codes even though they are not the same points
+
+    - If '^' is XOR, then it will return 0 if x == y
+
 5. Explain, in words, what is wrong with the following hashCode() method:
 
     ``` java
@@ -330,7 +507,9 @@ Recall that a skiplist stores elements in a sequence of smaller and smaller list
     }
     ```
 
-Give an example of 2 different points that have the same hashCode().
+    Give an example of 2 different points that have the same hashCode().
+
+    - This will give an issue with points of swapped values, e.g. 1,2 and 2,1
 
 ## 6: Binary Trees
 
@@ -338,17 +517,35 @@ Give an example of 2 different points that have the same hashCode().
 
 1. Draw a good sized binary tree.
 
+    ...ha
+
 2. Label the nodes of your drawing with their depth.
+
+    ...
 
 3. Label the nodes by the order they are processed in a preorder traversal.
 
+    **Preorder:** Root, then left always, and then right
+    **Inorder:** Left to right
+    **Postorder:** Bottom to top, with left priority
+
 4. Label the nodes by the order they are processed in an inorder traversal.
+
+    ...
 
 5. Label the nodes by the order they are processed in a postorder traversal.
 
+    ...
+
 6. Label the nodes of your tree with the sizes of their subtrees
 
+    ...
+
 7. What kind of traversal would you do to compute the sizes of all subtrees in a tree?
+
+    You would use inorder traversal
+    - Preorder is good for copying the tree [root first]
+    - Postorder is good for deleting the tree
 
 ### 6.2 Binary Search Trees
 
