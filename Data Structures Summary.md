@@ -59,7 +59,7 @@ Efficient insertion / deletion at back [think stack].
 
 `// the amortized cost of resize() for m calls is 2m/m = O(1)`
 
-![array-stack](ArrayStack.png)
+![array-stack](img/ArrayStack.png)
 
 ### ArrayQueue / ArrayDeque
 
@@ -73,7 +73,7 @@ Efficient insertion / deletion at front and back [think deque].
 
 `// since ArrayQueue only supports addLast() and removeFirst(), these are O(1)`
 
-![array-queue](ArrayQueue.png)
+![array-queue](img/ArrayQueue.png)
 
 ### DualArrayDeque
 
@@ -86,7 +86,7 @@ Efficient insertion / deletion at front and back [think deque].
 - **get(), set() in O(1)**
 - **add(), remove() in O(1 + min(i, n-i))**
 
-![dual-array-deque](DualArrayDeque.png)
+![dual-array-deque](img/DualArrayDeque.png)
 
 ### RootishArrayStack
 
@@ -104,7 +104,7 @@ Efficient insertion / deletion at back.
 
 `// m ≥ 1 add() / remove() calls, results on O(m) time on resize()`
 
-![rootish-array](RootishArray.png)
+![rootish-array](img/RootishArray.png)
 
 ## Linked Lists
 
@@ -121,7 +121,7 @@ Expensive access.
 - **get(), set() in O(1 + i)**
 - **add(), remove() in O(1)**
 
-![linked-list](LinkedList.png)
+![linked-list](img/LinkedList.png)
 
 ### Doubly Linked List [DLList]
 
@@ -133,7 +133,7 @@ Expensive access.
 - **get(), set() in O(1 + min(i, n-i))**
 - **add(), remove() in  O(1 + min(i, n-i))**
 
-![doubly-linked-list](DoublyLinkedList.png)
+![doubly-linked-list](img/DoublyLinkedList.png)
 
 ### SELList [Space-Efficient Linked List]
 
@@ -160,7 +160,7 @@ Allows for faster searches.
 - **get(), set() in O(log n)**
 - **add(), remove() in O(log n)**
 
-![sset-interface](SSetInterface.png)
+![sset-interface](img/SSetInterface.png)
 
 ## **After Midterm**
 
@@ -171,7 +171,7 @@ Allows for faster searches.
   - Index elements into a range of int
   - for non-integer elements, use hashCode()
 
-![hash-table](HashTable.png)
+![hash-table](img/HashTable.png)
 
 ### ChainedHashTable
 
@@ -185,7 +185,7 @@ Allows for faster searches.
 
 - Nodes with up to two child nodes
 
-![binary-tree](BinaryTree.png)
+![binary-tree](img/BinaryTree.png)
 
 ### Binary Search Tree [BST]
 
@@ -214,7 +214,7 @@ This has the property of bounding the height of the tree.
 - **contructed in O( n•log(n) )**
 - **find(), add(), remove() in O(log n)**
 
-![treap](Treap.png)
+![treap](img/Treap.png)
 
 ### Scapegoat Tree
 
@@ -226,7 +226,7 @@ BST that with height maintained within O(log n), rebuilt if too unbalanced
 - **rebuild() in O(log n) amortized**
 - **find(), add(), remove() in O(log n)**
 
-![scapegoat](Scapegoat.png)
+![scapegoat](img/Scapegoat.png)
 
 `// m calls to add() / remove (), results in O( m•log(n) time spent on rebuild()`
 

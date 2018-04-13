@@ -8,9 +8,17 @@
 
     It is a set of all functions..
 
+    O(f(n)) denotes the set of functions g(n) where c•f(n) starts to dominate at large enough n.
+
+    It describes the limiting behaviour of a function. In terms of algorithms, it describes the worst case runtime. It is a set of all functions that are larger than the runtime of an algorithm, at sufficiently large n.
+
+    It describes the growth rate of an algorithm's runtime as the number of elements increases.
+
 2. What does the statement 2n + 3 = O(n^2) mean?
 
     It means that the function 2n+3 is a member of the Set O(n^2)
+
+    It means that for a given value k, 2n + 3 ≤ k•n^2
 
 3. Recall the basic big-O hierarchy: for any constants a,b > 1:
 
@@ -21,10 +29,12 @@
 4. What is the running time (in big-o notation) for the following function, assuming the method foo() runs in constant time?
 
     ``` java
-    for(int i=1; i<n; i++)
-        for(int j=n-i; j<n; j++)
-            foo();
+    for(int i=1; i<n; i++)          // n times =>O(n)
+        for(int j=n-i; j<n; j++)    // n/2 times => O(n)
+            foo();                  // O(1)
     ```
+
+    Thus, this function has a runtime that is O(n^2).
 
 ### 1.2 Java Collections Framework - Interfaces
 
