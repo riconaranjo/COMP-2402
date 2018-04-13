@@ -777,11 +777,11 @@ Since random selection, might choose worst value [ideally middle value].
 
 ### Comparison-based Algorithms
 
-|            | Comparisons                      | In-place | Stable |
-|------------|----------------------------------|----------|--------|
-| Merge Sort | _n•log(n)_ [worst-case]          | no       | yes    |
-| Heap Sort  | _1.38n•log(n) + O(n)_ [expected] | yes      | no     |
-| Quick Sort | _2n•log(n) + O(n)_ [worst-case]  | yes      | no     |
+|            | Comparisons                        | In-place | Stable |
+|------------|------------------------------------|----------|--------|
+| Merge Sort | _n•log(n)_ [worst-case]            | no       | yes    |
+| Heap Sort  | _1.38n•log(n) + O(n)_ [worst-case] | yes      | no     |
+| Quick Sort | _2n•log(n) + O(n)_ [expected]      | yes      | no     |
 
 **Merge Sort:**
 

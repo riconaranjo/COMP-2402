@@ -743,19 +743,33 @@ These questions are about complete binary heaps represented using the Eytzinger 
 
 1. Explain the relative advantages of MergeSort, HeapSort, and Quicksort. Things to keep in mind are (a) the number of comparisons performed, (b) the amount of extra memory required by the algorithms, and (c) whether their running time is guaranteed or only probabilistic.
 
-    Stable [if order of duplicates is preserved]? Inplace [if elements are copied to new memory blocks]? Which has lowest number of comparisons?
+    Stable: Means order of equal values is preserved
+    In-place: Means that original list is modified by sort
 
-    **Mergesort:** Stable but not in place. n•log n comparisons. Great unless memory restriction. [best in terms of comparisons]
+    **Merge Sort:**
+    - Only one that is stable
+    - Only one that isn't in-place
+        - thus extra memory is needed
+    - The most comparisons
+    - Runtime is guaranteed since it
 
-    **Heapsort:** Not stable, but in place. 2 comparisons
+    **Heap Sort:**
+    - Not stable
+    - In-place
+    - Quickest in terms of least comparisons
+        - No randomness, thus runtime is guaranteed
 
-    **Quicksort:** Not stable, and in place. 2•ln8 [4.16] comparions[??]. It has largest worst time, but good average time.
+    **Quick Sort:**
+    - Not stable
+    - In-place
+    - The second best in terms of comparisons
+        - Randomness, thus runtime is probabilistic
 
 2. Create a random permutation of numbers 0,...,15. Walkthrough the sorting of this permutation using the HeapSort, MergeSort, QuickSort, and CountingSort algorithms.
 
 3. Explain how the Radix sort algorithm works. What key feature of the counting sort algorithm makes it work correctly?
 
-    **Radix sort:** Best when you have a spart array, or large range with many zeros.
+    **Radix sort:** Best when you have a sparse array, or large range with many zeros.
 
     It uses counting sorts in sections of size _d_; Sort least significant bits first using counting sort, so that next significant bit duplicates are already sorted...
 
