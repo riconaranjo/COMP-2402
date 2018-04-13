@@ -575,11 +575,12 @@ boolean addNode(x) {
 
 **Case 3:** Node has two children
 
-- Replace the node with the smallest value, unless in right subtree
+- Replace the node with inorder successor
+  - replace with node at lower level, favouring left side
 
 ### Random Binary Search Trees [RBST]
 
-Balanced trees are statistically more likely
+Balanced trees are statistically more likely.
 
 - Implements the **SSet** interface
 - **contructed in O( n•log(n) )**
@@ -602,7 +603,8 @@ This has the property of bounding the height of the tree.
 
 ### Scapegoat Tree
 
-BST that with height maintained within O(log n), rebuilt if too unbalanced
+BST that with height maintained within O(log n), rebuilt if too unbalanced.</br>
+Limited with integer q, where height ≤ log_{3/2}(q)
 
 - Implements the **SSet** interface
 - Rebuild only one search path that triggered rebuild
@@ -690,6 +692,14 @@ A complete Binary Tree that also maintains the heap property.
 
 `// m ≥ 1 add() / remove() calls, results in O(m) time on resize()`
 
+### Eytzinger Method
+
+A method to represent a complete binary tree as an array
+
+**Parent:** can be found at (i-1)/2
+**Left Child:** can be found at 2i+1
+**Right Child:** can be found at 2i+2
+
 ### Meldable Heap
 
 A randomized heap, not bound by an shape or balancing.
@@ -737,9 +747,8 @@ Sort list by merging sorted sub-lists, reduces total number of comparisons neede
 Sort by traversing down a heap tree.
 
     1. Create a heap from list
-    2. Swap first and last nodes [swap in list too]
-        - first node is root
-        - last node is smallest leaf
+    2. Delete the root node [in list, a[n-1]]
+        - Now root is in a[n], since n--
     3. Heapify [make sure heap property is preserved]
     4. Repeat steps 2-4 until no more elements to sort
 
@@ -752,7 +761,7 @@ Sort by traversing down a heap tree.
 
 ### Quick Sort
 
-Sort using a randomly selected value as partition point, sorting sub-lists.</br>
+Sort using a randomly selected value as pivot point, then sorting the sub-lists.</br>
 Since random selection, might choose worst value [ideally middle value].
 
     1. Randomly select value
@@ -882,15 +891,18 @@ e.g.
 
 We can use Breadth-first or Depth-first search order to visit every node.
 
-**Preorder:** Start at the root node, go left always, else go right
+**Preorder:** Start at the root node, go left always, else go right</br>
+[visits each node **before its children**]
 
 - Used to copy the tree
 
-**Inorder:** All nodes from left to right [visually]
+**Inorder:** All nodes from left to right [visually]</br>
+[visits each node **after its left** children]
 
 - Useful for getting size of all subtrees
 
-**Postorder:** Bottom to top, with left priority
+**Postorder:** Bottom to top, with left priority</br>
+[visits node **after its children**]
 
 - Used to delete tree
 

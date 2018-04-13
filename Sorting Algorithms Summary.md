@@ -27,9 +27,8 @@ Sort list by merging sorted sub-lists, reduces total number of comparisons neede
 Sort by traversing down a heap tree.
 
     1. Create a heap from list
-    2. Swap first and last nodes [swap in list too]
-        - first node is root
-        - last node is smallest leaf
+    2. Delete the root node [in list, a[n-1]]
+        - Now root is in a[n], since n--
     3. Heapify [make sure heap property is preserved]
     4. Repeat steps 2-4 until no more elements to sort
 

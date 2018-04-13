@@ -218,7 +218,8 @@ This has the property of bounding the height of the tree.
 
 ### Scapegoat Tree
 
-BST that with height maintained within O(log n), rebuilt if too unbalanced
+BST that with height maintained within O(log n), rebuilt if too unbalanced.</br>
+Limited with integer q, where height ≤ log_{3/2}(q)
 
 - Implements the **SSet** interface
 - Rebuild only one search path that triggered rebuild

@@ -345,7 +345,7 @@ public class SLList<T> extends AbstractQueue<T> {
     You don't have quick access to the predecessor to the tail
 
     - Tail is only good for insertion
-    - Can be fixed with doubly linked list 
+    - Can be fixed with doubly linked list
 
 ### 3.2 Doubly-Linked Lists
 
@@ -560,37 +560,87 @@ Recall that a skiplist stores elements in a sequence of smaller and smaller list
 
 3. Show the search path for a value x in the tree and a value x' not in the tree
 
-    
+    ...
 
 4. Insert some value x' into the tree
 
+    Like finding but simply add at point search would fail.
+
 5. Delete some value x from your tree (try this for external nodes, internal nodes with 1 child, and internal nodes with two children).
+
+    **External node:**
+
+    Easy, delete node...
+
+    **Internal node:**
+
+    One child: move child up one, done...
+
+    Two children: Find closest value greater than deleted node value. Replace deleted node with this one.
 
 ## 7: Treaps
 
-1. Choose a permutation of the values 0,...15. Draw the binary search tree that results from inserting the elements of your permutation in order. Are there other permutations that could have given the same search tree?
+1. Choose a permutation of the values 0...15. Draw the binary search tree that results from inserting the elements of your permutation in order. Are there other permutations that could have given the same search tree?
+
+    ...
+
+    And yes, there are many [probablistically]
 
 2. Explain the relationship between quicksort and random binary search trees.
 
+    By building a RBST with the pivot value at the node, quick sort is implemented, since every value is compared to this pivot.
+
+    Given quicksort input of size n, the recursion tree is a RBST.
+
 3. Define the heap property for how priorities are used to make a binary tree into a Treap.
 
-4. Pick some random numbers p0, ..., p15, and draw the treap that contains 0,...,15 where pi gives the priority for number i
+    The heap property states that a child's key will be more extreme than it's parent's key. This is used to organize a binary tree into a heap by adding a 'priority' key to each node. This is done to bound the height of the tree, as the keys are randomly generated.
+
+4. Pick some random numbers p_0...p_15, and draw the treap that contains 0...15 where p_i gives the priority for number i.
+
+    ...
 
 5. Explain the relationship between random binary search trees and Treaps.
 
+    Since the keys are unique and randomly generated, a Treap can be thought of as following both the heap property and binary search tree properties.
+
+    Or, a Treap can be thought of as a RBST with nodes insterted by increasing priority.
+
 6. Explain the relationship between insertion and deletion in a Treap.
+
+    When values are added or removed, the tree may have to move nodes around to maintain heap property [heapify].
 
 ## 8: Scapegoat Trees
 
-Recall that a scapegoat node is a node v = u.parent where 2•size(u) > 3•size(u.parent).
+Recall that a scapegoat node is where 3•size(u) > 2•size(u.parent).
+
+    They have a deterministic height [this is what triggers rebuild, when height is exceeded]
 
 1. In a scapegoat tree, is size(u) < size(u.parent) for every non-root node u?
 
+    Yes, since any subtree of u, must be a subtree of the parent node.
+
 2. Draw an example of a tree that looks surprisingly unbalanced but is still a valid scapegoat tree.
 
-3. Exaplain why, in a scapegoat tree, we keep two separate counters n and q that both -sort of- keep track of the number of nodes?
+    ...
 
-4. If v is a scapegoat node (for example, because 3*size(v.left) > 2*size(v)) then explain how many operations (insertion/deletions) have affected v's subtree since the last time the subtree containing v was rebuilt.
+    - Assume a value for limiting parameter q (q = n = 10)
+    - Then the height can be up to log_{3/2}(q)
+        - log_{3/2}(10) is about 5.6, so can draw tree with up to 5 height
+
+3. Explain why, in a scapegoat tree, we keep two separate counters n and q that both -sort of- keep track of the number of nodes?
+
+    n is the number of elements in the list
+
+    q is a counter, used to maintain the upper-bound on the number of nodes
+
+    They are used to bound the height, by checking if by adding / removing a node does not maintain a height ≤ log_{3/2}(q).
+
+    q is initially the value of n, and incremented with each added node, and decremented with each removed node.
+
+4. If v is a scapegoat node (for example, because 3•size(v.left) > 2•size(v)) then explain how many operations (insertion/deletions) have affected v's subtree since the last time the subtree containing v was rebuilt.
+
+    at least 1/3•size(v) calls to add() / remove().
 
 ## 9: 2-4 and Red-Black Trees
 
@@ -598,13 +648,25 @@ Advantages of 2-4: log n height **always**; deterministic. Treap have randomness
 
 1. Draw an interesting example of a 2-4 tree.
 
+    - Tree with all every leaf at equal depth, all internal nodes have 2-4 children
+
 2. Explain what happens in a 2-4 tree when an insertion causes a node to have more than 4 children.
+
+    If this causes an internal node to have more than 4 children, then we split the node into two with 2 and 3 children. If the parent node now has too many children, then it too will be split.
 
 3. Explain what happens in a 2-4 tree when a deletion causes a node to have only one child.
 
-4. Draw a red-black tree that corresponds to your 2-4 tree
+    The node is added to the sibling of the internal node, since it is guaranteed to have at least one sibling. If this causes the parent of the internal node to have less than 2 children, then it's merged with its sibling; if the parent is the root, then the sole child of the root becomes the new root.
+
+4. Draw a red-black tree that corresponds to your 2-4 tree.
+
+    Same thing, except all paths to external nodes have same number of black nodes [analagous to same depth of external nodes in 2-4 tree].
+
+    - Anywhere there are more than 2 children to a node, split into groups of one or two with red node parents.
 
 5. Explain the relationship between the red-black tree properties and the 2-4 tree properties.
+
+    A RedBlack tree simulates a 2-4 tree with a binary tree implementation.
 
 ## 10: Heaps
 
@@ -614,21 +676,68 @@ These questions are about complete binary heaps represented using the Eytzinger 
 
 1. Draw an example of a complete binary heap with key values.
 
+    ...
+
+    Binary tree that maintains the heap property, like a Treap without the priority key, implemented with an array.
+
+    e.g. root is always minimum value
+
 2. Illustrate how your example's values map into an array using the Eytzinger Method.
+
+    ...
+
+    Go through tree with breadth-first traversal, with left child priority.
+
+    - Parent of node at index i are found at (i-1)/2
+    - Left child of node at index i are found at 2i + 1
+    - Right child of node at index i are found at 2i + 2
 
 3. Consider a binary heap represented using the Eytzinger Method. Give the formulas for the parent, left child, and right child of the value stored at position i.
 
+    - Parent of node at index i are found at (i-1)/2
+    - Left child of node at index i are found at 2i + 1
+    - Right child of node at index i are found at 2i + 2
+
 4. When we perform a DeleteMin (remove()) operation on a heap, where do we get the value to replace the root, and what do we do with it?
+
+    The easiest way is to replace the root with the last value in the array a[n-1].
+
+    - This is probably not the minimum value, thus it must be moved down [heapify]
+        - compare value to its children
+        - if it is larger than either one, it is swapped with the smallest child
+        - repeat
 
 5. Explain or illustrate the insertion algorithm for a heap
 
+    - First check the size of the array, if it is full resize()
+    - Next place new value in a[n] [first empty space in array]
+    - Heapify
+        - swap new value with its parent if it is smaller than the parent
+
 6. Explain the operation of HeapSort
+
+    Heap Sort: Turn everything into Binary Heap, and remove root value everytime.
+
+    Remove root node [this will store it on array at a[n] after deletion]
+    - Afterwards array will have sorted list
 
 ### 10.2 Randomized Meldable Heaps
 
+    Binary Heaps with no limit to size and shape.
+
 1. Draw two examples of heaps (not necessarily complete) and show how to meld (merge) them.
 
+    ...
+
+    Given two binary trees x, y:
+    - Random coin flip if y is merged with x.left or x.right
+    - This is done recursively
+
 2. Explain how the add(x), and remove() operations can be done using the meld() operation.
+
+    Merging only one node is the same as adding one node.
+
+    To remove a node, merge its children
 
 ### 11: Sorting Algorithms
 
