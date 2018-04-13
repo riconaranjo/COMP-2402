@@ -549,11 +549,18 @@ Recall that a skiplist stores elements in a sequence of smaller and smaller list
 
 ### 6.2 Binary Search Trees
 
-1. Consider an array containing the integers 0,...,15 in sorted order. Illustrate the operation of binary search on a few (a) integer values and a few (b) non-integer values.
+1. Consider an array containing the integers 0...15 in sorted order. Illustrate the operation of binary search on a few (a) integer values and a few (b) non-integer values.
 
-2. Draw a binary search tree containing (at least) 0,...,15
+    - Check if current value is equal to expected value
+    - if current value is smaller: go to left child, else right child
+
+2. Draw a binary search tree containing (at least) 0...15
+
+    ...
 
 3. Show the search path for a value x in the tree and a value x' not in the tree
+
+    
 
 4. Insert some value x' into the tree
 

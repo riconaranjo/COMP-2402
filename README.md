@@ -882,17 +882,17 @@ e.g.
 
 We can use Breadth-first or Depth-first search order to visit every node.
 
-**Preorder:** Root, then left always, and then right
+**Preorder:** Start at the root node, go left always, else go right
+
+- Used to copy the tree
+
+**Inorder:** All nodes from left to right [visually]
 
 - Useful for getting size of all subtrees
 
-**Inorder:** Left to right
-
-- Used to delete the tree
-
 **Postorder:** Bottom to top, with left priority
 
-- Used to copy the tree
+- Used to delete tree
 
 #### Breadth-first Search
 
