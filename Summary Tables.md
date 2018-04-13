@@ -37,3 +37,24 @@ These are all the tables summarizing the comparisons between different data stru
 | Merge Sort | _n•log(n)_ [worst-case]          | no       | yes    |
 | Heap Sort  | _1.38n•log(n) + O(n)_ [expected] | yes      | no     |
 | Quick Sort | _2n•log(n) + O(n)_ [worst-case]  | yes      | no     |
+
+## Graph Implementations
+
+|            | Adjacency Matrix    | Adjacency List      |
+|------------|---------------------|---------------------|
+| addEdge    | _O(1)_              | _O(1)_              |
+| removeEdge | _O(1)_              | _O(deg(i))_         |
+| hasEdge    | _O(1)_              | _O(deg(i))_         |
+| outEdge    | _O(n)_              | _O(1)_              |
+| inEdge     | _O(n)_              | _O(n+m)_            |
+|            |                     |                     |
+| space used | _O(n^2)_            | _O(n+m)_            |
+
+## Adjacency Matrix vs. Adjacency List
+
+It is better to use **Adjacency List** for **traversals**.
+
+|            | Adjacency Matrix    | Adjacency List      |
+|------------|---------------------|---------------------|
+| Breadth    | _O(n^2)_            | _O(n+m)_            |
+| Depth      | _O(n^2)_            | _O(n+m)_            |

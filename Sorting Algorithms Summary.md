@@ -52,7 +52,7 @@ Since random selection, might choose worst value [ideally middle value].
 - Comparison-based
 - **In-place**
 - **Not stable**
-- **Runs in O(n•log(n)) [expeceted] time**
+- **Runs in O(n•log(n)) [expected] time**
 
 `// performs at most 2n•log(n) + O(n)`
 

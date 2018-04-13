@@ -762,7 +762,7 @@ Since random selection, might choose worst value [ideally middle value].
 - Comparison-based
 - **In-place**
 - **Not stable**
-- **Runs in O(n•log(n)) [expeceted] time**
+- **Runs in O(n•log(n)) [expected] time**
 
 `// performs at most 2n•log(n) + O(n)`
 
@@ -774,9 +774,50 @@ Since random selection, might choose worst value [ideally middle value].
 | Heap Sort  | _1.38n•log(n) + O(n)_ [expected] | yes      | no     |
 | Quick Sort | _2n•log(n) + O(n)_ [worst-case]  | yes      | no     |
 
+**Merge Sort:**
+
+- Fewest comparisons
+- Does not rely on randomization [consistent runtime]
+- Not in-place [expensive memory usage]
+- Stable
+- Much better at sorting a linked list
+  - no additional memory is needed with pointer manipulation
+
+**Quick Sort:**
+
+- Second fewest comparisons
+- Randomized [inconsistent runtime]
+- In-place [memory efficient]
+
+**Heap Sort:**
+
+- Most comparisons
+- Randomized
+- In-place
+
 ### Counting Sort
 
+Counting array is used to keep track of duplicates; it is then used to construct the sorted list.
+
+- Not comparison-based
+- **Not in-place**
+- **Not stable**
+- **Runs in O(n+k) time**
+  - n integers
+  - range of 0...k
+
+`// efficient for integers when the length is roughly equal to maximum value k-1`
+
 ### Radix Sort
+
+Sorts w-bit integer with counting sort on d-bits per integer [least to most significant]
+
+- Not comparison-based
+- **Not in-place**
+- **Not stable**
+- **Runs in O(c•n) time**
+  - n w-bit integers
+  - range of 0...(n^c - 1)
 
 ## Graphs
 
@@ -809,6 +850,15 @@ Interface that defines characteristics of a graph
 
 `• n is the number of nodes`</br>
 `• m is the number of edges`
+
+### Adjacency Matrix
+
+An _n x n_ matrix representing adjacent nodes.
+
+- useful for dense graphs [approx. n^2 edges]
+  - memory usage is acceptable
+- Matrix algebraic operations to computer property of graph
+  - like finding shortest paths between all pairs of vertices
 
 ### Adjacency List
 
@@ -843,10 +893,11 @@ Go through all adjacent nodes first the.
 
 - You do this with a queue and list
   - queue stores position we are at
-    - add all adjacent nodes to queue
-    - remove values when cannot to any other unseen node
-    - check if we have seen them
+    - add all unseen adjacent nodes to queue and seen list
+    - remove value from queue
+    - go to removed value, repeat
   - list stores nodes we have seen
+    - so that seen values are not added to queue
 
 #### Depth-first Search
 
@@ -858,12 +909,14 @@ Go through list based of a priority.
 
 - You do this with a stack and list
   - stack stores position we are at
-    - add all adjacent nodes to stack
-    - remove values when cannot to any other unseen node
-    - check if we have seen them
+    - add current node to seen list
+    - add smallest unseen adjacent nodes stack [recursively]
   - list stores nodes we have seen
+    - so that recursive calls are always to smallest unseen node
 
-It is better to use **Adjacency List** for traversals.
+### Adjacency Matrix vs. Adjacency List
+
+It is better to use **Adjacency List** for **traversals**.
 
 |            | Adjacency Matrix    | Adjacency List      |
 |------------|---------------------|---------------------|
