@@ -80,6 +80,8 @@ All of these questions should be considered in the context of the interfaces in 
 
     This is important because...
 
+    // todo: this question
+
 2. Describe the running time of the methods get(i) and set(i,x) for an ArrayList versus a LinkedList.
 
     ArrayList is quicker since no need to traverse.
@@ -751,27 +753,29 @@ These questions are about complete binary heaps represented using the Eytzinger 
     - Only one that isn't in-place
         - thus extra memory is needed
     - The most comparisons
-    - Runtime is guaranteed since it
+    - No randomness, this runtime is guaranteed
 
     **Heap Sort:**
     - Not stable
     - In-place
     - Quickest in terms of least comparisons
-        - No randomness, thus runtime is guaranteed
+    - No randomness, thus runtime is guaranteed
 
     **Quick Sort:**
     - Not stable
     - In-place
     - The second best in terms of comparisons
-        - Randomness, thus runtime is probabilistic
+    - Randomness, thus runtime is probabilistic
 
-2. Create a random permutation of numbers 0,...,15. Walkthrough the sorting of this permutation using the HeapSort, MergeSort, QuickSort, and CountingSort algorithms.
+2. Create a random permutation of numbers 0...15. Walkthrough the sorting of this permutation using the HeapSort, MergeSort, QuickSort, and CountingSort algorithms.
+
+    ...
 
 3. Explain how the Radix sort algorithm works. What key feature of the counting sort algorithm makes it work correctly?
 
     **Radix sort:** Best when you have a sparse array, or large range with many zeros.
 
-    It uses counting sorts in sections of size _d_; Sort least significant bits first using counting sort, so that next significant bit duplicates are already sorted...
+    It uses counting sorts in sections of size _d_; Sort least significant bits first using Counting Sort, so that next significant bit duplicates are already sorted...
 
 ## 12: Graphs
 

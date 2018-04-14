@@ -786,7 +786,7 @@ Since random selection, might choose worst value [ideally middle value].
 **Merge Sort:**
 
 - Fewest comparisons
-- Does not rely on randomization [consistent runtime]
+- Does not rely on randomization [guaranteed runtime]
 - Not in-place [expensive memory usage]
 - Stable
 - Much better at sorting a linked list
@@ -795,14 +795,16 @@ Since random selection, might choose worst value [ideally middle value].
 **Quick Sort:**
 
 - Second fewest comparisons
-- Randomized [inconsistent runtime]
+- Randomized [expected runtime]
 - In-place [memory efficient]
+- Not stable
 
 **Heap Sort:**
 
 - Most comparisons
-- Randomized
-- In-place
+- Not randomized [guaranteed runtime]
+- In-place  [memory efficient]
+- Not stable
 
 ### Counting Sort
 

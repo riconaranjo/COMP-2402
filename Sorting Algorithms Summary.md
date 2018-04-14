@@ -62,3 +62,50 @@ Since random selection, might choose worst value [ideally middle value].
 | Merge Sort | _n•log(n)_ [worst-case]            | no       | yes    |
 | Heap Sort  | _1.38n•log(n) + O(n)_ [worst-case] | yes      | no     |
 | Quick Sort | _2n•log(n) + O(n)_ [expected]      | yes      | no     |
+
+**Merge Sort:**
+
+- Fewest comparisons
+- Does not rely on randomization [guaranteed runtime]
+- Not in-place [expensive memory usage]
+- Stable
+- Much better at sorting a linked list
+  - no additional memory is needed with pointer manipulation
+
+**Quick Sort:**
+
+- Second fewest comparisons
+- Randomized [expected runtime]
+- In-place [memory efficient]
+- Not stable
+
+**Heap Sort:**
+
+- Most comparisons
+- Not randomized [guaranteed runtime]
+- In-place  [memory efficient]
+- Not stable
+
+## Counting Sort
+
+Counting array is used to keep track of duplicates; it is then used to construct the sorted list.
+
+- Not comparison-based
+- **Not in-place**
+- **Not stable**
+- **Runs in O(n+k) time**
+  - n integers
+  - range of 0...k
+
+`// efficient for integers when the length is roughly equal to maximum value k-1`
+
+## Radix Sort
+
+Sorts w-bit integer with counting sort on d-bits per integer [least to most significant]
+
+- Not comparison-based
+- **Not in-place**
+- **Not stable**
+- **Runs in O(c•n) time**
+  - n w-bit integers
+  - range of 0...(n^c - 1)
