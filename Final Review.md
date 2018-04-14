@@ -402,9 +402,9 @@ public class DLList<T> extends AbstractSequentialList<T> {
 
 Recall that a space efficient doubly-linked list implements the List interface by storing a sequence of blocks (arrays) each containing b ± 1 elements.
 
-    The wasted space is divided by b, but adds b blocks
+The wasted space is divided by b, but adds b blocks
 
-    - n + O(n/b + b)
+- n + O(n/b + b)
 
 1. What is the running-time of get(i) and set(i) in a space-efficient doubly-linked list?
 
@@ -466,9 +466,12 @@ Recall that a skiplist stores elements in a sequence of smaller and smaller list
 2. Recall the multiplicative hash function hash(x) = (x.hashCode() * z) >>> w-d.
 
     a. In 32-bit Java, what is the value of w?
-        - 32 bits...
+    - 32 bits...
+
     b. How large is the table that is used with this hash function? (In other words, what is the range of this hash function?)
-        - d?
+    - The range is m - 1, where m = 2^d
+        - 0...(2^d -1)
+
     c. Write this function in more standard mathematical notation using the mod and div (integer division) operators.
         hash(x) = (z•x) mod 2^w ) div 2^(w-d)
 
