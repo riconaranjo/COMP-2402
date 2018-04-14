@@ -718,7 +718,7 @@ A path through a binary tree [i.e. the expected depth of a node].
 
 ## Sorting Alogrithms
 
-**In-place:** means modifying list to be sorted [as opposed to returning new sorted list].
+**In-place:** means modifying list to be sorted [as opposed to returning new sorted list].</br>
 **Stable:** means the order of elements with equal values is preserved.
 
 ### Lower bound on Comparion-based Sorting
