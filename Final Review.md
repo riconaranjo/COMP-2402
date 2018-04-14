@@ -90,14 +90,15 @@ All of these questions should be considered in the context of the interfaces in 
 
 3. Describe the running time of the method add(i,x) for an ArrayList versus a LinkedList.
 
-    ArrayList is good for adding or removing at the front / back because no need to shift elements. [Assume ArrayDeque with quick access to front / back]
-    - O(min(n-i,1) + 1)
+    ArrayList is good for adding or removing at the front / back because no need to shift elements.
+    - ArrayStack: O(n-i+1)
+    - ArrayDeque: O(min(n-i,i) + 1)
     LinkedList is good for adding anywhere, as long as there is a pointer to the location being added to, otherwise traversal through each element is needed.
     - O(1) [given pointer to location]
 
 4. For each of the following methods, decide if it is fast or slow when:
 
-    **(a)** l is an ArrayList</br>
+    **(a)** when l is an ArrayList</br>
     **(b)** when l is a LinkedList.
 
     ``` java

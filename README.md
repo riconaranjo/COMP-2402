@@ -157,7 +157,7 @@ After a certain point, g(x) will grow as fast [or faster] than f(x)
 | O(1)         | Constant     |
 | O(log n)     | Logarithmic  |
 | O(n)         | Linear       |
-| O(n log n)   | Quasilinear  |
+| O(n•log(n))  | Quasilinear  |
 | O(n^2)       | Quasilinear  |
 | O(2^n)       | Exponential  |
 | O(n!)        | Factorial    |
@@ -500,19 +500,15 @@ but, reverse is not true:
 
 ![binary-tree](img/BinaryTree.png)
 
-Nodes:
+**Root:** top-most node
+**Internal:** nodes that have children
+**Leaf:** nodes with no children
+**External:** null nodes [children of leaf nodes]
 
-- Root: top-most node
-- Internal: nodes that have children
-- Leaf: nodes with no children
-- External: null nodes [children of leaf nodes]
-
-Definitions:
-
-- Depth: distance from root
-- level: set of nodes at same depth
-- height: largest depth for subtree at node
-- size: number of nodes for subtree at node
+**Depth:** distance from root
+**Level:** set of nodes at same depth
+**Height:** largest depth for subtree at node
+**Size:** number of nodes for subtree at node [inclusive of current node]
 
 How to calculate the size of a subtree [recursively]
 
@@ -668,6 +664,8 @@ Case 0: black parent...
 **Case 1:** Adding red node with red parent, but black uncle
 
 - Rotate left or right at black grandparent
+- Parent (Red->Black)
+- Grandparent (Black->Red)
 
 **Case 2:** Adding red node with red parent and red uncle
 
