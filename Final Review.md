@@ -78,9 +78,7 @@ All of these questions should be considered in the context of the interfaces in 
 
 1. Explain why it is important that elements that are stored in a Set or Map aren't modified in a way that affects the outcome of the equals() method.
 
-    This is important because...
-
-    // todo: this question
+    This is important because, otherwise they cannot be sorted using a comparator, since this uses the equals() method of the object.
 
 2. Describe the running time of the methods get(i) and set(i,x) for an ArrayList versus a LinkedList.
 
@@ -781,8 +779,18 @@ These questions are about complete binary heaps represented using the Eytzinger 
 
 1. Draw an interesting directed graph (with at least 6 nodes).
 
+    ...
+
 2. How many entries are in the Adjacency List representation of this graph? (Can you know without listing them?)
+
+    ...
 
 3. How many zeroes are in the Adjacency Matrix representation of this graph?
 
+    ...
+
+    Adjacency list has all outbound edges from a node at it's index
+
 4. Walkthrough the Breadth-first and Depth-first traversals of this graph. Of the two trees that these traversals create, which has a greater height?
+
+    Breadth-first search probably has the greatest height since it doesn't really have dead ends easily.
